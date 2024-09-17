@@ -40,7 +40,6 @@
                     <!-- Barra de pesquisa -->
                     <form class="d-flex">
                         <input class="form-control me-2" type="search" placeholder="Pesquisar produto" aria-label="Search">
-                        <button class="btn btn-dark" type="submit">🔍</button>
                     </form>
                 </div>
             </div>
@@ -50,9 +49,12 @@
     <!-- Carrinho e Resumo do Pedido -->
     <main class="container mt-5">
         <div class="row">
+
+
             <!-- Lista de Produtos -->
             <section class="col-12 col-lg-8">
                 <div class="product-list">
+                    <!----------------------- ESTRUTURA PARA SER CRIADA DINAMICAMENTE ---------------------------------->
                     <div class="product-card mb-3 d-flex justify-content-between align-items-center bg-light p-3 rounded">
                         <div class="product-info d-flex align-items-center">
                             <div class="product-image me-3">
@@ -65,12 +67,13 @@
                         </div>
                         <div class="product-actions d-flex align-items-center">
                             <input type="number" class="form-control me-2" value="1" min="1" max="99" style="width: 70px;">
-                            <span class="me-2">Preço total</span>
-                            <button class="btn btn-danger">
+                            <span class="me-2">Preço total</span> <!-- ADICIONAR O VALOR DINAMICO  -->
+                            <button class="btn btn-danger"><!-- TIRAR ESSE BOTAO E COLOCAR UM ICONE -->
                                 <img src="trash-icon.png" alt="Remover" width="20">
                             </button>
                         </div>
                     </div>
+                    <!----------------------- FIM -> ESTRUTURA PARA SER CRIADA DINAMICAMENTE ---------------------------------->
 
                     <!-- Duplicar essa estrutura para outros produtos no carrinho -->
                     <div class="product-card mb-3 d-flex justify-content-between align-items-center bg-light p-3 rounded">
@@ -100,6 +103,7 @@
                     <h2 class="mb-4 text-center">Resumo do pedido</h2>
                     <form>
                         <div class="mb-3">
+                            <!-- FAZER AJAX PARA BUSCAR O CEP ATRAVES DO PYTHON  -->
                             <label for="cep" class="form-label">CEP</label>
                             <div class="input-group">
                                 <input type="text" class="form-control" id="cep" placeholder="Digite o CEP">
