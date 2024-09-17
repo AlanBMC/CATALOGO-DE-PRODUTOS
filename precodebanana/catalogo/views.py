@@ -11,7 +11,9 @@ def catalogo(request):
     return render(request, 'catalogo.html')
 
 def carrinho(request):
-    pass
+    if request.method == 'GET':
+        return render(request, 'carrinho.html')
+    
 
 def envia_mensagem_wpp(request):
     pass
