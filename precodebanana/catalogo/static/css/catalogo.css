@@ -1,0 +1,132 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #e3e3e3;
+    padding: 0;
+    margin: 0;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #a38323;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+.menu-item {
+    background-color: #ffff66;
+    padding: 8px 15px;
+    margin-right: 20px;
+    color: #000;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.cart img {
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #ffff66;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.search-bar input {
+    border: none;
+    padding: 5px;
+    background-color: transparent;
+}
+
+.search-bar button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Catálogo */
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.catalog {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.product-card {
+    background-color: #ffffab;
+    width: 300px;
+    padding: 20px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.product-image {
+    background-color: #ccc;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.product-details p {
+    margin: 5px 0;
+}
+
+.buy-button {
+    background-color: #00cc00;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.buy-button:hover {
+    background-color: #008000;
+}
+.product-image img {
+    max-width: 100%;  /* Ajusta a largura da imagem ao tamanho do card */
+    max-height: 200px;  /* Limita a altura da imagem */
+    object-fit: contain;  /* Garante que a imagem mantenha suas proporções */
+}

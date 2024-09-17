@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preço de Banana - Carrinho</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{%static 'css/carrinho.css'%}">
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <img src="#" alt="Logo Preço de Banana" width="50" height="50" class="d-inline-block align-top me-2">
+                <span class="fw-bold">Preço de Banana</span>
+            </a>
+            <!-- Botão para colapsar o menu no mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Carrinho</a>
+                    </li>
+                </ul>
+                <!-- Ícone do carrinho -->
+                <div class="d-flex align-items-center ms-3">
+                    <a href="#" class="cart me-3">
+                        <img src="cart-icon.png" alt="Carrinho" width="30" height="30">
+                    </a>
+                    <!-- Barra de pesquisa -->
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Pesquisar produto" aria-label="Search">
+                        <button class="btn btn-dark" type="submit">🔍</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Carrinho e Resumo do Pedido -->
+    <main class="container mt-5">
+        <div class="row">
+            <!-- Lista de Produtos -->
+            <section class="col-12 col-lg-8">
+                <div class="product-list">
+                    <div class="product-card mb-3 d-flex justify-content-between align-items-center bg-light p-3 rounded">
+                        <div class="product-info d-flex align-items-center">
+                            <div class="product-image me-3">
+                                <img src="product-image.png" alt="Produto" width="80" height="80">
+                            </div>
+                            <div>
+                                <p class="mb-1 fw-bold">Preço Caixa</p>
+                                <p class="mb-0">R$ 12,00</p>
+                            </div>
+                        </div>
+                        <div class="product-actions d-flex align-items-center">
+                            <input type="number" class="form-control me-2" value="1" min="1" max="99" style="width: 70px;">
+                            <span class="me-2">Preço total</span>
+                            <button class="btn btn-danger">
+                                <img src="trash-icon.png" alt="Remover" width="20">
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Duplicar essa estrutura para outros produtos no carrinho -->
+                    <div class="product-card mb-3 d-flex justify-content-between align-items-center bg-light p-3 rounded">
+                        <div class="product-info d-flex align-items-center">
+                            <div class="product-image me-3">
+                                <img src="product-image.png" alt="Produto" width="80" height="80">
+                            </div>
+                            <div>
+                                <p class="mb-1 fw-bold">Preço Caixa</p>
+                                <p class="mb-0">R$ 12,00</p>
+                            </div>
+                        </div>
+                        <div class="product-actions d-flex align-items-center">
+                            <input type="number" class="form-control me-2" value="1" min="1" max="99" style="width: 70px;">
+                            <span class="me-2">Preço total</span>
+                            <button class="btn btn-danger">
+                                <img src="trash-icon.png" alt="Remover" width="20">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Resumo do Pedido -->
+            <section class="col-12 col-lg-4">
+                <div class="summary-card bg-warning p-4 rounded shadow-sm">
+                    <h2 class="mb-4 text-center">Resumo do pedido</h2>
+                    <form>
+                        <div class="mb-3">
+                            <label for="cep" class="form-label">CEP</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="cep" placeholder="Digite o CEP">
+                                <button class="btn btn-secondary" type="button">Buscar</button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="casa" class="form-label">Casa</label>
+                            <input type="text" class="form-control" id="casa" placeholder="Número da casa">
+                        </div>
+                        <div class="mb-3">
+                            <label for="complemento" class="form-label">Complemento</label>
+                            <input type="text" class="form-control" id="complemento" placeholder="Complemento">
+                        </div>
+                        <hr>
+                        <p>Total dos produtos: <strong>R$ 00,00</strong></p>
+                        <p>Valor do frete: <strong>R$ 00,00</strong></p>
+                        <p>Total da compra: <strong>R$ 00,00</strong></p>
+                        <button class="btn btn-success w-100 mt-3">Comprar</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
