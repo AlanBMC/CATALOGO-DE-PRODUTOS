@@ -38,6 +38,10 @@ nav {
     align-items: center;
 }
 
+.cart{
+    color: #00cc00 !important;
+    background-color: #00cc00;
+}
 .menu-item {
     background-color: #ffff66;
     padding: 8px 15px;
@@ -48,10 +52,17 @@ nav {
     text-decoration: none;
 }
 
-.cart img {
-    width: 30px;
-    height: 30px;
+.cart {
+   
     margin-right: 20px;
+    
+}
+.cart {
+    transition: transform 0.3s ease; /* Animação suave ao passar o mouse */
+}
+
+.cart:hover {
+    transform: scale(1.2); /* Aumenta o tamanho em 20% */
 }
 
 .search-bar {

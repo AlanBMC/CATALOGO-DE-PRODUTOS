@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #e3e3e3;
+    background-color: #6c5757;
     font-family: Arial, sans-serif;
 }
 
@@ -20,7 +20,7 @@ header img {
 }
 
 .product-list .product-card {
-    background-color: #f0f0f0;
+    background-color: #823636;
     border-radius: 8px;
 }
 
@@ -70,4 +70,15 @@ header img {
     .summary-card {
         margin-top: 20px;
     }
+}
+.precocaixa {
+    margin-left: 20px;  /* Adiciona um espaço entre as divs */
+}
+
+.precoun {
+    margin-left: 30px;  /* Adiciona um espaço entre as divs */
+}
+
+.product-card {
+    background: #f3f588 !important;
 }
