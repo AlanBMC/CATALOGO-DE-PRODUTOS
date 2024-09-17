@@ -68,7 +68,7 @@
                         <p>Preço por caixa: R$ - {{produto.preco_por_caixa}}</p>
                         <p>Quantidade por caixa - {{produto.quantidade_na_caixa}}</p>
                         <form method="POST"> {% csrf_token %}
-                            <input type="text" name="id_produto" id="id_produto_{{produto.id}}" value="{{produto.id}}">
+                            <input type="hidden" name="id_produto" id="id_produto_{{produto.id}}" value="{{produto.id}}">
                             <button type="button" style="margin-bottom: 5px; margin-top: 5px;" class="btn btn-success" onclick="adicionaprodutoaocarrinho('{{produto.id}}')" >+ Adicionar ao carrinho</button>
                         </form>
                             

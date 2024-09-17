@@ -1,6 +1,5 @@
 function adicionaprodutoaocarrinho(produtoId) {
     let id_produto = document.getElementById('id_produto_'+produtoId).value;  // Obtém o ID do produto do campo oculto
-    console.log(id_produto);
 
     if (id_produto.trim() !== "") {
         $.ajax({

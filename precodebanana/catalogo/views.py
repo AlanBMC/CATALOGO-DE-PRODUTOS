@@ -1,20 +1,21 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from .models import Produto
 from django.http import JsonResponse
-
+from decimal import Decimal, InvalidOperation
+import json
 
 # Create your views here.
 def catalogo(request):
     if request.method == 'GET':
         produtos = Produto.objects.all()
-
         return render(request, 'catalogo.html',{'catalogo':produtos})
 
     return render(request, 'catalogo.html')
 
+
+
 def carrinho_view(request):
     carrinho = request.session.get('carrinho', {})
-    print(carrinho)
     return render(request, 'carrinho.html')
 
 
@@ -22,7 +23,6 @@ def adiciona_produto_carrinho(request):
     if request.method == 'POST':
         produto_id = request.POST.get('id_produto')
         produto = get_object_or_404(Produto, id=produto_id)
-        print(produto.nome)
         carrinho = request.session.get('carrinho', {})
         
 
