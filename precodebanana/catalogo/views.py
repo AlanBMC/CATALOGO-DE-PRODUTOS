@@ -59,7 +59,10 @@ def remove_produto_carrinho(request):
 
 
 def buscacep(request):
-    pass
+    if request.method == 'POST':
+        cep = request.POST.get('cep')
+        return JsonResponse({'status': 'cep encontrado'})
+    
 def envia_mensagem_wpp(request):
     pass
 

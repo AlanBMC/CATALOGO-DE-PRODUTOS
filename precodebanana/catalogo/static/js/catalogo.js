@@ -37,23 +37,3 @@ document.addEventListener("DOMContentLoaded", function(){
     })
 })
 
-function buscacep(){
-    const cep = document.getElementById('cep').value
-    if (cep.trim() !== ""){
-        $.ajax({
-            url: cepURL,
-            Type: 'POST',
-            data: {
-                'cep':cep,
-                'csrfmiddlewaretoken': document.querySelector('[name="csrfmiddlewaretoken"]').value  // CSRF Token
-
-            },
-            success: function (data) {
-                console.log('achado com sucesso');
-            },
-            error: function (response) {
-                console.log('Erro ao buscar cep');
-            }
-        })
-    }
-}
