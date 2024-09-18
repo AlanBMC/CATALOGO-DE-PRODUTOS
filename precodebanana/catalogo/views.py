@@ -57,7 +57,9 @@ def remove_produto_carrinho(request):
 
     return redirect('carrinho')
 
-    
+
+def buscacep(request):
+    pass
 def envia_mensagem_wpp(request):
     pass
 
