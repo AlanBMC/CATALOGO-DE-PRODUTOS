@@ -18,3 +18,4 @@ function totaldosprodutos(){
 document.addEventListener('DOMContentLoaded', function() {
     totaldosprodutos();  // Calcula o total dos produtos logo quando a página é carregada
 });
+

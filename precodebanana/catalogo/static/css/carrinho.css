@@ -82,3 +82,18 @@ header img {
 .product-card {
     background: #f3f588 !important;
 }
+.lixeiraicon{
+    margin-left: 25px;
+  color: #ff0000;
+  size: 20px;
+}
+.botaoremoveproduto{
+    background-color: transparent;  /* Fundo transparente */
+    border: none;                   /* Remove a borda */
+    padding: 0;                     /* Remove o padding */
+    cursor: pointer;   
+    transition: transform 0.2s ease;
+}
+.botaoremoveproduto:hover {
+    transform: scale(1.3);          /* Aumenta o tamanho em 20% ao passar o mouse */
+}

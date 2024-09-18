@@ -77,6 +77,10 @@
                                 <p class="mb-1 fw-bold ">Preço UN</p>
                                 <p class="mb-2">R$ {{produto.precoUN}}</p>
                             </div>
+                            <div>
+                                <p class="mb-1 fw-bold ">Quantidade</p>
+                                <p class="mb-2">{{produto.quantidade_na_caixa}}</p>
+                            </div>
                         </div>
                         <div class="product-actions d-flex align-items-center">
                             <div class="quantidadeinput">
@@ -85,6 +89,18 @@
                             <div class="precototal">
                                 <p class="mb-1 fw-bold ">Preço total</p> <!-- ADICIONAR O VALOR DINAMICO  -->
                                 <p class="mb-2" id="preco-total-{{produto_id}}">R$ {{produto.preco_por_caixa}}</p>
+                            </div>
+                            <div class="lixeiraicon">
+                                <form action="{% url 'remove_prod_carrinho' %}" method="POST"> {% csrf_token %}
+                                    <input type="hidden" name="id_produto" value="{{produto_id}}">
+                                    <button type="submit" class="botaoremoveproduto">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="#ff0000" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                        </svg>
+                                    </button>
+                             
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -130,6 +146,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="{% static 'js/carrinho.js' %}"></script>
 </body>
 

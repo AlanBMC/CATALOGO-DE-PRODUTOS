@@ -16,7 +16,6 @@ def catalogo(request):
 
 def carrinho_view(request):
     carrinho = request.session.get('carrinho', {})
-    print(carrinho)
     return render(request, 'carrinho.html', {'produtos': carrinho })
 
 
@@ -34,11 +33,29 @@ def adiciona_produto_carrinho(request):
             'precoUN': float(produto.preco_un),
             'quantidade': 1
         }    
-
         request.session['carrinho'] = carrinho
         return JsonResponse({
             'status':'produt adicionado com sucesso'
         })
+
+
+def remove_produto_carrinho(request):
+    if request.method == 'POST':
+        produto_id = request.POST.get('id_produto')
+        carrinho = request.session.get('carrinho', {})
+        print('produto id',produto_id)
+        # Verifica se o produto está no carrinho e o remove
+        if produto_id in carrinho:
+            del carrinho[produto_id]  # Remove o produto do carrinho
+            request.session['carrinho'] = carrinho  # Atualiza a sessão
+            return redirect('carrinho')
+        
+        else:
+            return redirect('carrinho')
+
+    return redirect('carrinho')
+
+    
 def envia_mensagem_wpp(request):
     pass
 
