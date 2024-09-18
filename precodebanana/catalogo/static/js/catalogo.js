@@ -18,3 +18,21 @@ function adicionaprodutoaocarrinho(produtoId) {
         });
     }
 }
+
+document.addEventListener("DOMContentLoaded", function(){
+    const procurar = document.getElementById('procurar-input');
+    const produtos = Array.from(document.getElementsByClassName('cards-produtos'));
+    procurar.addEventListener('input', function(){
+        const achados = procurar.value.toLowerCase()
+        produtos.forEach(prod =>{
+            const nomeProd = prod.querySelector("p:nth-child(1)").textContent.toLowerCase();
+            const precoProd = prod.querySelector("p:nth-child(2)").textContent.toLowerCase();
+            const precocaixaProd = prod.querySelector("p:nth-child(3)").textContent.toLowerCase();
+            if (nomeProd.includes(achados) || precoProd.includes(achados) || precocaixaProd.includes(achados)){
+                prod.style.display = 'block';
+            }else{
+                prod.style.display = 'none';
+            }
+        })
+    })
+})

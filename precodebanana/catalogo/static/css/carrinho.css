@@ -17,6 +17,7 @@ header img {
 /* Estilos da página */
 .product-image img {
     background-color: #ccc;
+    border-radius: 5px;
 }
 
 .product-list .product-card {
@@ -96,4 +97,13 @@ header img {
 }
 .botaoremoveproduto:hover {
     transform: scale(1.3);          /* Aumenta o tamanho em 20% ao passar o mouse */
+}
+
+.quant-carrinho{
+    margin-left: 25px;
+
+}
+.carrinho-quantidade ,.carrinho-precocaixa, .carrinho-precoun, .carrinho-precototal{
+    background-color: #00cc0068;
+    border-radius: 5px;
 }

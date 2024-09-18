@@ -12,12 +12,12 @@
     <link rel="stylesheet" href="{% static 'css/catalogo.css' %}">
 </head>
 <body>
-
+    
     <!-- Cabeçalho -->
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="{% static 'logo2.png' %}" alt="Logo Preço de Banana" width="50" height="50" class="d-inline-block align-top me-2">
+            <a  class="navbar-brand d-flex align-items-center" href="#">
+                <img style="border-radius: 50%;" src="{% static 'logo2.png' %}" alt="Logo Preço de Banana" width="50" height="50"  class="d-inline-block align-top me-2">
                 <span class="fw-bold">Preço de Banana</span>
             </a>
             <!-- Botão para colapsar o menu no mobile -->
@@ -27,11 +27,9 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#inicio">Início</a>
+                        <a class="nav-link active" aria-current="page" href="#">Início</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Produtos</a>
-                    </li>
+               
                
                 </ul>
                 <!-- Ícone do carrinho -->
@@ -45,7 +43,7 @@
                             </a>
                     <!-- Barra de pesquisa -->
                     <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Pesquisar produtos" aria-label="Search">
+                        <input class="form-control me-2" type="search" id="procurar-input" placeholder="Pesquisar produtos" aria-label="Search">
                     </form>
                 </div>
             </div>
@@ -53,27 +51,28 @@
     </nav>
 
     <!-- Catálogo -->
-    <main id="#inicio" class="container mt-5">
-        <h1 class="text-center mb-4">Catálogo</h1>
+    <main  class="container mt-5 catalogo-h">
+        <div id="inicio" class="catalogotexto">
+
+            <h1 class="text-center mb-4 ">Catálogo</h1>
+        </div>
 
         <div class="row justify-content-center">
             {% for produto in catalogo %}
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <div class="col-12 col-md-6 col-lg-4 mb-4 cards-produtos">
                 <div class="product-card card bg-warning text-dark shadow-sm">
-                    <div class="product-image card-body text-center bg-light mb-3">
-                        <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" id="imagemproduto" class="img-fluid">
-                        
-                        
+                    <div  class="product-image mb-3">
+                        <img   src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" id="imagemproduto" >
                     </div>
                     
                     <div class="product-details text-center">
                         <p><strong>{{produto.nome}}</strong></p>
-                        <p>Preço UN: R$ - {{produto.preco_un}}</p>
-                        <p>Preço por caixa: R$ - {{produto.preco_por_caixa}}</p>
+                        <p >Preço UN: R$ {{produto.preco_un}}</p>
+                        <p>Preço por caixa: R$ {{produto.preco_por_caixa}}</p>
                         <p>Quantidade por caixa - {{produto.quantidade_na_caixa}}</p>
                         <form method="POST"> {% csrf_token %}
                             <input type="hidden" name="id_produto" id="id_produto_{{produto.id}}" value="{{produto.id}}">
-                            <button type="button" style="margin-bottom: 5px; margin-top: 5px;" class="btn btn-success" onclick="adicionaprodutoaocarrinho('{{produto.id}}')" >+ Adicionar ao carrinho</button>
+                            <button type="button" style="margin-bottom: 5px; margin-top: 5px;" class="btn btn-success botao-add-carrinho" onclick="adicionaprodutoaocarrinho('{{produto.id}}')" >+ Adicionar ao carrinho</button>
                         </form>
                             
                         </div>
