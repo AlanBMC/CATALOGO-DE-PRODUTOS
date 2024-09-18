@@ -85,16 +85,17 @@
                             </div>
                         </div>
                         <div class="product-actions d-flex align-items-center">
-                            <div class="quantidadeinput">
-                                <input type="number" oninput="validarInteiro(this)" class="form-control me-2" value="1"
+
+                                <div class="quantidadeinput">
+                                    <input type="number" oninput="validarInteiro(this)" class="form-control me-2" value="{{produto.quantidade}}"
                                     min="1" max="99"
-                                    onchange="atualizaprecototal('{{produto.preco_por_caixa}}', this.value,'preco-total-{{produto_id}}')"
+                                    onchange="atualizaprecototal('{{produto.preco_por_caixa}}', this.value,'preco-total-{{produto_id}}', '{{produto_id}}')"
                                     style="width: 70px;">
-                            </div>
+                                </div>
                             <div class="precototal">
                                 <p class="mb-1 fw-bold ">Preço total</p> <!-- ADICIONAR O VALOR DINAMICO  -->
                                 <p class="mb-2 carrinho-precototal" id="preco-total-{{produto_id}}">R$
-                                    {{produto.preco_por_caixa}}</p>
+                                    {{produto.subtotal}}</p>
                             </div>
                             <div class="lixeiraicon">
                                 <form action="{% url 'remove_prod_carrinho' %}" method="POST"> {% csrf_token %}
@@ -126,6 +127,7 @@
                 <div class="summary-card bg-warning p-4 rounded shadow-sm">
                     <h2 class="mb-4 text-center">Resumo do pedido</h2>
                     <form action="{% url 'busca_cep' %}" method="POST"> {% csrf_token %}
+
                         <div class="mb-3">
                             <!-- FAZER AJAX PARA BUSCAR O CEP ATRAVES DO PYTHON  -->
                             <label for="cep" class="form-label">CEP</label>
@@ -139,14 +141,16 @@
                         </div>
                     </form>
                     <form action="{% url 'envia_pedido' %}" method="POST"> {% csrf_token %}
-
+                        <input type="text" name="produtos_json" id="produtos-json" >
+                  
                         <div class="mb-3">
-                            <label name="rua"> {{rua}}</label>
-                            <input type="text" name="rua" value="{{rua}}">
-                            <p >{{cidade}}</p>
-                            <input type="text" name="cidade" value="{{cidade}}">
-                            <p>{{bairro}}</p>
-                            <input type="text" name="bairro" value="{{bairro}}">
+                            <p>Rua: {{rua}}</p>
+                            <input type="hidden" name="rua" value="{{rua}}">
+                            <p >Cidade: {{cidade}}</p>
+                            <input type="hidden" name="cidade" value="{{cidade}}">
+                            <p >Bairro: {{bairro}}</p>
+                            <input type="hidden" name="bairro" value="{{bairro}}">
+                            <input type="hidden" name="quantidade" id="id-quantidade-envia-wpp">
                         </div>
                         <div class="mb-3">
                             <label for="complemento" class="form-label">Complemento</label>
