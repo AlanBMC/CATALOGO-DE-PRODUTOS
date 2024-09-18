@@ -17,8 +17,8 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-warning">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{%url 'catalogo' %}">
-                <img style="border-radius: 50%;" src="{% static 'logo2.png' %}" alt="Logo Preço de Banana" width="50" height="50"
-                    class="d-inline-block align-top me-2">
+                <img style="border-radius: 50%;" src="{% static 'logo2.png' %}" alt="Logo Preço de Banana" width="50"
+                    height="50" class="d-inline-block align-top me-2">
                 <span class="fw-bold">Preço de Banana</span>
             </a>
             <!-- Botão para colapsar o menu no mobile -->
@@ -39,9 +39,11 @@
                 <!-- Ícone do carrinho -->
                 <div class="d-flex align-items-center ms-3">
                     <a href="#" class="cart me-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"  class="bi bi-cart-plus-fill carrinho" viewBox="0 0 16 16">
-                            <path fill="#008000" d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
-                          </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
+                            class="bi bi-cart-plus-fill carrinho" viewBox="0 0 16 16">
+                            <path fill="#008000"
+                                d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0" />
+                        </svg>
                     </a>
                     <!-- Barra de pesquisa -->
                     <form class="d-flex">
@@ -64,7 +66,7 @@
                     <!----------------------- ESTRUTURA PARA SER CRIADA DINAMICAMENTE ---------------------------------->
                     {% if produtos %}
                     {%for produto_id, produto in produtos.items %}
-                    <div  class="product-card mb-3 d-flex justify-content-between align-items-center p-3 rounded">
+                    <div class="product-card mb-3 d-flex justify-content-between align-items-center p-3 rounded">
                         <div class="product-info d-flex align-items-center">
                             <div class="product-image me-3">
                                 <img src="/media/{{produto.imagem}}" alt="Produto" width="80" height="80">
@@ -84,22 +86,29 @@
                         </div>
                         <div class="product-actions d-flex align-items-center">
                             <div class="quantidadeinput">
-                                <input type="number" oninput="validarInteiro(this)"  class="form-control me-2" value="1" min="1" max="99" onchange="atualizaprecototal('{{produto.preco_por_caixa}}', this.value,'preco-total-{{produto_id}}')" style="width: 70px;">
+                                <input type="number" oninput="validarInteiro(this)" class="form-control me-2" value="1"
+                                    min="1" max="99"
+                                    onchange="atualizaprecototal('{{produto.preco_por_caixa}}', this.value,'preco-total-{{produto_id}}')"
+                                    style="width: 70px;">
                             </div>
                             <div class="precototal">
                                 <p class="mb-1 fw-bold ">Preço total</p> <!-- ADICIONAR O VALOR DINAMICO  -->
-                                <p class="mb-2 carrinho-precototal" id="preco-total-{{produto_id}}">R$ {{produto.preco_por_caixa}}</p>
+                                <p class="mb-2 carrinho-precototal" id="preco-total-{{produto_id}}">R$
+                                    {{produto.preco_por_caixa}}</p>
                             </div>
                             <div class="lixeiraicon">
                                 <form action="{% url 'remove_prod_carrinho' %}" method="POST"> {% csrf_token %}
                                     <input type="hidden" name="id_produto" value="{{produto_id}}">
                                     <button type="submit" class="botaoremoveproduto">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="#ff0000" class="bi bi-trash" viewBox="0 0 16 16">
-                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" fill="#ff0000"
+                                            class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path
+                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                            <path
+                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                                         </svg>
                                     </button>
-                             
+
                                 </form>
                             </div>
                         </div>
@@ -116,32 +125,41 @@
             <section class="col-12 col-lg-4">
                 <div class="summary-card bg-warning p-4 rounded shadow-sm">
                     <h2 class="mb-4 text-center">Resumo do pedido</h2>
+                    <form action="{% url 'busca_cep' %}" method="POST"> {% csrf_token %}
                         <div class="mb-3">
-                            <!-- FAZER AJAX PARA BUSCAR O CEP ATRAVES DO PYTHON  --> 
-                             <form action="{% url 'busca_cep' %}" method="POST"> {% csrf_token %}
-                                 <label for="cep" class="form-label">CEP</label>
-                                 <div class="input-group">
-                                     <input type="text" class="form-control" id="cep-input" placeholder="Digite o CEP">
-                                     <button class="btn btn-secondary botao-input" id="buscarCepBtn"  type="submit">Buscar</button>
-                                    </div>
-                                </form>
+                            <!-- FAZER AJAX PARA BUSCAR O CEP ATRAVES DO PYTHON  -->
+                            <label for="cep" class="form-label">CEP</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="cep-input" name="cep-input"
+                                    placeholder="Digite o CEP" required>
+                                <button class="btn btn-secondary botao-input" id="buscarCepBtn"
+                                    type="submit">Buscar</button>
+                            </div>
 
                         </div>
+                    </form>
+                    <form action="{% url 'envia_dados_wpp' %}" method="POST"> {% csrf_token %}
 
                         <div class="mb-3">
-                            <label for="casa" class="form-label">Casa</label>
-                            <input type="text" class="form-control" id="casa" placeholder="Número da casa">
+                            <label name="rua"> {{rua}}</label>
+                            <p>{{cidade}}</p>
+                            <p>{{bairro}}</p>
                         </div>
                         <div class="mb-3">
                             <label for="complemento" class="form-label">Complemento</label>
-                            <input type="text" class="form-control" id="complemento" placeholder="Complemento">
+                            <input type="text" class="form-control" id="complemento" placeholder="Complemento" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="complemento" class="form-label">Numero</label>
+                            <input type="text" class="form-control" id="numerocasa" placeholder="Numero" required>
                         </div>
                         <hr>
-                        <p>Total dos produtos: <strong id="total-dos-produtos">R$ 00,00</strong></p>
+                        <p>Total dos produtos: <strong name="total-dos-produtos"  id="total-dos-produtos">R$ 00,00</strong></p>
                         <p>Valor do frete: <strong>R$ 00,00</strong></p>
-                        <p>Total da compra: <strong id="total-com-frete">R$ 00,00</strong></p>
-                        <button class="btn btn-success w-100 mt-3">Comprar</button>
+                        <p>Total da compra: <strong name="total-com-frete" id="total-com-frete">R$ 00,00</strong></p>
+                        <button type="submit" class="btn btn-success w-100 mt-3">Comprar</button>
                 </div>
+                </form>
             </section>
         </div>
     </main>
@@ -150,7 +168,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="{%static 'js/carrinho.js' %}"></script>
-    
+
 </body>
 
 </html>

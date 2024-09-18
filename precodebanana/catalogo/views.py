@@ -3,7 +3,7 @@ from .models import Produto
 from django.http import JsonResponse
 from decimal import Decimal, InvalidOperation
 import json
-
+import requests
 # Create your views here.
 def catalogo(request):
     if request.method == 'GET':
@@ -60,10 +60,22 @@ def remove_produto_carrinho(request):
 
 def buscacep(request):
     if request.method == 'POST':
-        cep = request.POST.get('cep')
-        print('foi', cep)
-        return JsonResponse({'status': 'cep encontrado'})
-    
+        cep = request.POST.get('cep-input')
+        print(cep)
+        if cep and len(cep) == 8:
+            url = f"https://viacep.com.br/ws/{cep}/json/"
+            response = requests.get(url)
+            if response.status_code == 200:
+                rua = response.json()['logradouro']
+                cidade = response.json()['localidade']
+                bairro = response.json()['bairro']
+                carrinho = request.session.get('carrinho', {})
+                return render(request, 'carrinho.html', {'rua': rua,'bairro': bairro,'cidade':cidade, 'produtos': carrinho})
+            else:
+                print('cep nao encontrado')
+                return redirect('carrinho')
+        else:
+            return redirect('carrinho')
 def envia_mensagem_wpp(request):
     pass
 
