@@ -8,13 +8,16 @@ import requests
 def catalogo(request):
     if request.method == 'GET':
         produtos = Produto.objects.all()
-        return render(request, 'catalogo.html',{'catalogo':produtos})
+        carrinho = request.session.get('carrinho', {})
+        quantidade_produtos= len(carrinho)
+        return render(request, 'catalogo.html',{'catalogo':produtos, 'alertquantidade':quantidade_produtos})
 
     return render(request, 'catalogo.html')
 
 def carrinho_view(request):
     carrinho = request.session.get('carrinho', {})
-    return render(request, 'carrinho.html', {'produtos': carrinho })
+    quantidade_produtos = len(carrinho)
+    return render(request, 'carrinho.html', {'produtos': carrinho,'alertquantidade': quantidade_produtos})
 
 def adiciona_produto_carrinho(request):
     if request.method == 'POST':
@@ -95,7 +98,8 @@ def buscacep(request):
                 cidade = response.json()['localidade']
                 bairro = response.json()['bairro']
                 carrinho = request.session.get('carrinho', {})
-                return render(request, 'carrinho.html', {'rua': rua,'bairro': bairro,'cidade':cidade, 'produtos': carrinho})
+                quantidade_produtos = len(carrinho)
+                return render(request, 'carrinho.html', {'rua': rua,'bairro': bairro,'cidade':cidade, 'produtos': carrinho, 'alertquantidade':quantidade_produtos})
             else:
                 return redirect('carrinho')
         else:
@@ -112,8 +116,9 @@ def envia_mensagem_wpp(request):
         total_com_frete = request.POST.get('total-com-frete')
         total_dos_produtos = request.POST.get('total-dos-produtos')
         carrinho = request.session.get('carrinho', {})
-        print(carrinho, rua, complemento, total_com_frete, total_dos_produtos)
-        return render(request, 'carrinho.html', {'produtos': carrinho})
+        quantidade_produtos = len(carrinho)
+        print(quantidade_produtos)
+        return render(request, 'carrinho.html', {'produtos': carrinho, 'alertquantidade':len(carrinho)})
     else:
         return redirect('carrinho')
 
