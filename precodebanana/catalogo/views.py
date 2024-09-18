@@ -16,6 +16,7 @@ def catalogo(request):
 
 def carrinho_view(request):
     carrinho = request.session.get('carrinho', {})
+    print(carrinho)
     return render(request, 'carrinho.html', {'produtos': carrinho })
 
 
@@ -31,6 +32,7 @@ def adiciona_produto_carrinho(request):
             'nome': produto.nome,
             'preco_por_caixa': float(produto.preco_por_caixa),
             'precoUN': float(produto.preco_un),
+            'quantidade_na_caixa': produto.quantidade_na_caixa,
             'quantidade': 1
         }    
         request.session['carrinho'] = carrinho
