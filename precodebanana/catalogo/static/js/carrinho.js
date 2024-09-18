@@ -52,6 +52,8 @@ function totaldosprodutos(){
     })
     document.getElementById('total-dos-produtos').innerText = 'R$ ' + totalGeral.toFixed(2)
     document.getElementById('total-com-frete').innerText = 'R$ ' + totalGeral.toFixed(2)
+    document.getElementById('totalfrete').value = totalGeral.toFixed(2)
+    document.getElementById('totalpreco').value = totalGeral.toFixed(2)
 }
 document.addEventListener('DOMContentLoaded', function() {
     totaldosprodutos();  // Calcula o total dos produtos logo quando a página é carregada

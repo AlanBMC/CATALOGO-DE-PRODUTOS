@@ -14,7 +14,7 @@
 <body>
     
     <!-- Cabeçalho -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning" style=" box-shadow: 0 4px 8px rgba(64, 170, 73, 0.323), 0 6px 20px rgba(109, 150, 101, 0.233);">
         <div class="container">
             <a  class="navbar-brand d-flex align-items-center" href="#">
                 <img style="border-radius: 50%;" src="{% static 'logo2.png' %}" alt="Logo Preço de Banana" width="50" height="50"  class="d-inline-block align-top me-2">
@@ -59,8 +59,8 @@
 
         <div class="row justify-content-center">
             {% for produto in catalogo %}
-            <div class="col-12 col-md-6 col-lg-4 mb-4 cards-produtos">
-                <div class="product-card card bg-warning text-dark shadow-sm">
+            <div class="col-12 col-md-6 col-lg-4 mb-4 cards-produtos" >
+                <div class="product-card card bg-warning text-dark" style=" box-shadow: 0 4px 8px rgba(64, 170, 73, 0.323), 0 6px 20px rgba(109, 150, 101, 0.233);" >
                     <div  class="product-image mb-3">
                         <img   src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" id="imagemproduto" >
                     </div>

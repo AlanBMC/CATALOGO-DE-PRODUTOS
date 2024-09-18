@@ -12,13 +12,9 @@ def catalogo(request):
 
     return render(request, 'catalogo.html')
 
-
-
 def carrinho_view(request):
     carrinho = request.session.get('carrinho', {})
-    print(carrinho)
     return render(request, 'carrinho.html', {'produtos': carrinho })
-
 
 def adiciona_produto_carrinho(request):
     if request.method == 'POST':
@@ -44,8 +40,6 @@ def adiciona_produto_carrinho(request):
         return JsonResponse({
             'status':'produt adicionado com sucesso'
         })
-
-
 
 def atualiza_carrinho(request):
     if request.method == 'POST':
@@ -78,7 +72,6 @@ def remove_produto_carrinho(request):
     if request.method == 'POST':
         produto_id = request.POST.get('id_produto')
         carrinho = request.session.get('carrinho', {})
-        print('produto id',produto_id)
         # Verifica se o produto está no carrinho e o remove
         if produto_id in carrinho:
             del carrinho[produto_id]  # Remove o produto do carrinho
@@ -90,12 +83,10 @@ def remove_produto_carrinho(request):
 
     return redirect('carrinho')
 
-
 def buscacep(request):
     if request.method == 'POST':
         cep = request.POST.get('cep-input')
         cep = cep.replace("-", "").replace(".", "").replace(" ", "")
-        print(cep)
         if cep and len(cep) == 8:
             url = f"https://viacep.com.br/ws/{cep}/json/"
             response = requests.get(url)
@@ -106,7 +97,6 @@ def buscacep(request):
                 carrinho = request.session.get('carrinho', {})
                 return render(request, 'carrinho.html', {'rua': rua,'bairro': bairro,'cidade':cidade, 'produtos': carrinho})
             else:
-                print('cep nao encontrado')
                 return redirect('carrinho')
         else:
             return redirect('carrinho')
@@ -114,8 +104,15 @@ def buscacep(request):
 
 def envia_mensagem_wpp(request):
     if request.method == 'POST':
-
+        rua = request.POST.get('rua')
+        cidade = request.POST.get('cidade')
+        bairro = request.POST.get('bairro')
+        complemento = request.POST.get('complemento')
+        numero = request.POST.get('numero')
+        total_com_frete = request.POST.get('total-com-frete')
+        total_dos_produtos = request.POST.get('total-dos-produtos')
         carrinho = request.session.get('carrinho', {})
+        print(carrinho, rua, complemento, total_com_frete, total_dos_produtos)
         return render(request, 'carrinho.html', {'produtos': carrinho})
     else:
         return redirect('carrinho')

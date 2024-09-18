@@ -14,7 +14,7 @@
 <body>
 
     <!-- Cabeçalho -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning" style=" box-shadow: 0 4px 8px rgba(64, 170, 73, 0.323), 0 6px 20px rgba(109, 150, 101, 0.233);">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{%url 'catalogo' %}">
                 <img style="border-radius: 50%;" src="{% static 'logo2.png' %}" alt="Logo Preço de Banana" width="50"
@@ -66,7 +66,7 @@
                     <!----------------------- ESTRUTURA PARA SER CRIADA DINAMICAMENTE ---------------------------------->
                     {% if produtos %}
                     {%for produto_id, produto in produtos.items %}
-                    <div class="product-card mb-3 d-flex justify-content-between align-items-center p-3 rounded">
+                    <div class="product-card mb-3 d-flex justify-content-between align-items-center p-3 rounded" style=" box-shadow: 0 4px 8px rgba(64, 170, 73, 0.276), 0 6px 20px rgba(109, 150, 101, 0.202);">
                         <div class="product-info d-flex align-items-center">
                             <div class="product-image me-3">
                                 <img src="/media/{{produto.imagem}}" alt="Produto" width="80" height="80">
@@ -124,7 +124,7 @@
 
             <!-- Resumo do Pedido -->
             <section class="col-12 col-lg-4">
-                <div class="summary-card bg-warning p-4 rounded shadow-sm">
+                <div style=" box-shadow: 0 4px 8px rgba(64, 170, 73, 0.634), 0 6px 20px rgba(109, 150, 101, 0.659);" class="summary-card bg-warning p-4 rounded">
                     <h2 class="mb-4 text-center">Resumo do pedido</h2>
                     <form action="{% url 'busca_cep' %}" method="POST"> {% csrf_token %}
 
@@ -141,7 +141,6 @@
                         </div>
                     </form>
                     <form action="{% url 'envia_pedido' %}" method="POST"> {% csrf_token %}
-                        <input type="text" name="produtos_json" id="produtos-json" >
                   
                         <div class="mb-3">
                             <p>Rua: {{rua}}</p>
@@ -151,6 +150,8 @@
                             <p >Bairro: {{bairro}}</p>
                             <input type="hidden" name="bairro" value="{{bairro}}">
                             <input type="hidden" name="quantidade" id="id-quantidade-envia-wpp">
+                            <input type="hidden" name="total-dos-produtos" id="totalpreco">
+                            <input type="hidden" name="total-com-frete" id="totalfrete">
                         </div>
                         <div class="mb-3">
                             <label for="complemento" class="form-label">Complemento</label>
@@ -161,9 +162,9 @@
                             <input type="text" class="form-control" id="numerocasa" name="numero" placeholder="Numero" required>
                         </div>
                         <hr>
-                        <p>Total dos produtos: <strong name="total-dos-produtos"  id="total-dos-produtos">R$ 00,00</strong></p>
-                        <p>Valor do frete: <strong>R$ 00,00</strong></p>
-                        <p>Total da compra: <strong name="total-com-frete" id="total-com-frete">R$ 00,00</strong></p>
+                        <p>Total dos produtos: <strong  id="total-dos-produtos">R$ 00,00</strong></p>
+                        <p style="color: rgb(254, 8, 8);">Valor do frete - COMBINAR: <strong >R$ 00,00</strong></p>
+                        <p>Total da compra: <strong id="total-com-frete">R$ 00,00</strong></p>
                         <button type="submit" class="btn btn-success w-100 mt-3">Comprar</button>
                 </div>
                 </form>

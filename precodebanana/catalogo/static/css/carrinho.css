@@ -9,11 +9,19 @@ body {
     background-color: #6c5757;
     font-family: Arial, sans-serif;
 }
-
+html{
+    scroll-behavior: smooth;
+}
 header img {
     border-radius: 50%;
 }
-
+nav {
+    display: flex;
+    align-items: center;
+    z-index: 9999;
+    position: fixed;
+   
+}
 /* Estilos da página */
 .product-image img {
     background-color: #ccc;
@@ -26,7 +34,8 @@ header img {
 }
 
 .summary-card {
-    background-color: #ffff66;
+    background-color: #c1c1bd;
+    
 }
 
 .summary-card .form-control {
