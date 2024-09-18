@@ -138,20 +138,23 @@
 
                         </div>
                     </form>
-                    <form action="{% url 'envia_dados_wpp' %}" method="POST"> {% csrf_token %}
+                    <form action="{% url 'envia_pedido' %}" method="POST"> {% csrf_token %}
 
                         <div class="mb-3">
                             <label name="rua"> {{rua}}</label>
-                            <p>{{cidade}}</p>
+                            <input type="text" name="rua" value="{{rua}}">
+                            <p >{{cidade}}</p>
+                            <input type="text" name="cidade" value="{{cidade}}">
                             <p>{{bairro}}</p>
+                            <input type="text" name="bairro" value="{{bairro}}">
                         </div>
                         <div class="mb-3">
                             <label for="complemento" class="form-label">Complemento</label>
-                            <input type="text" class="form-control" id="complemento" placeholder="Complemento" required>
+                            <input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento" required>
                         </div>
                         <div class="mb-3">
                             <label for="complemento" class="form-label">Numero</label>
-                            <input type="text" class="form-control" id="numerocasa" placeholder="Numero" required>
+                            <input type="text" class="form-control" id="numerocasa" name="numero" placeholder="Numero" required>
                         </div>
                         <hr>
                         <p>Total dos produtos: <strong name="total-dos-produtos"  id="total-dos-produtos">R$ 00,00</strong></p>

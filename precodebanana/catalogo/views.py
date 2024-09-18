@@ -61,6 +61,7 @@ def remove_produto_carrinho(request):
 def buscacep(request):
     if request.method == 'POST':
         cep = request.POST.get('cep-input')
+        cep = cep.replace("-", "").replace(".", "").replace(" ", "")
         print(cep)
         if cep and len(cep) == 8:
             url = f"https://viacep.com.br/ws/{cep}/json/"
@@ -77,5 +78,18 @@ def buscacep(request):
         else:
             return redirect('carrinho')
 def envia_mensagem_wpp(request):
+    if request.method == 'POST':
+        rua = request.POST.get('rua')
+        cidade = request.POST.get('cidade')
+        bairro = request.POST.get('bairro')
+        complemento = request.POST.get('complemento')
+        numero = request.POST.get('numero')
+        carrinho = request.session.get('carrinho', {})
+        print(rua, complemento, numero)
+        return render(request, 'carrinho.html', {'rua': rua,'bairro': bairro,'cidade':cidade, 'produtos': carrinho})
+    else:
+        return redirect('carrinho')
+
+def processa_e_retorna_dados(cep):
     pass
 

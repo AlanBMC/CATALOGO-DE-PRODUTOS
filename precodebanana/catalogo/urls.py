@@ -8,4 +8,5 @@ urlpatterns = [
     path('adicionar_ao_carrinho/', views.adiciona_produto_carrinho, name='adiciona_produto_carrinho'),
     path('remove_produto_carrinho/', views.remove_produto_carrinho, name='remove_prod_carrinho'),
     path('buscacep/', views.buscacep, name='busca_cep'),
+    path('enviaepedido/', views.envia_mensagem_wpp, name='envia_pedido')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
