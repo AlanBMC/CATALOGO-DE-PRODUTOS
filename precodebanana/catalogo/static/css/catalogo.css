@@ -52,8 +52,9 @@ nav {
     width: 100%;
    
     z-index: 9999; /* Garante que a navbar fique acima de outros elementos */
-    background-color: #ffc107; /* Mantém o fundo da navbar visível quando o usuário descer */
+    background-color: #e8d7a24d; /* Mantém o fundo da navbar visível quando o usuário descer */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adiciona uma sombra para destaque */
+    backdrop-filter: blur(10px);
 }
 .menu-item {
     background-color: #ffff66;

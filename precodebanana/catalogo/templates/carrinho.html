@@ -14,7 +14,7 @@
 <body>
 
     <!-- Cabeçalho -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning" style=" box-shadow: 0 4px 8px rgba(64, 170, 73, 0.323), 0 6px 20px rgba(109, 150, 101, 0.233);">
+    <nav class="navbar navbar-expand-lg " style=" backdrop-filter: blur(10px); background-color: rgba(251, 231, 7, 0.574); box-shadow: 0 4px 8px rgba(64, 170, 73, 0.323), 0 6px 20px rgba(109, 150, 101, 0.233);">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{%url 'catalogo' %}">
                 <img style="border-radius: 50%;" src="{% static 'logo2.png' %}" alt="Logo Preço de Banana" width="50"
@@ -71,30 +71,31 @@
                             <div class="product-image me-3">
                                 <img src="/media/{{produto.imagem}}" alt="Produto" width="80" height="80">
                             </div>
-                            <div class="precocaixa">
-                                <p class="mb-1 fw-bold ">Preço Caixa</p>
-                                <p class="mb-2 carrinho-precocaixa">R$ {{produto.preco_por_caixa}}</p>
+                            <div class="precocaixa" style="display: flex; flex-direction: column; justify-content: center; align-items: center; " >
+                                <p class="mb-1 fw-bold " >Preço Caixa</p>
+                                <p class="mb-2 carrinho-precocaixa" style="padding: 2px;">R$ {{produto.preco_por_caixa}}</p>
                             </div>
-                            <div class="precoun">
-                                <p class="mb-1 fw-bold ">Preço UN</p>
-                                <p class="mb-2 carrinho-precoun">R$ {{produto.precoUN}}</p>
+                            <div class="precoun"  style="display: flex; flex-direction: column; justify-content: center; align-items: center; " >
+                                <p class="mb-1 fw-bold " >Preço un</p>
+                                <p class="mb-2 carrinho-precoun" style="padding: 2px;">R$ {{produto.precoUN}}</p>
                             </div>
-                            <div class="quant-carrinho">
+                            <div class="quant-carrinho"  style="display: flex; flex-direction: column; justify-content: center; align-items: center;" >
                                 <p class="mb-1 fw-bold ">Quantidade</p>
-                                <p class="mb-2 carrinho-quantidade">{{produto.quantidade_na_caixa}}</p>
+                                <p class="mb-2 carrinho-quantidade" style="padding-left: 5px; padding-right: 5px;">{{produto.quantidade_na_caixa}}</p>
                             </div>
                         </div>
                         <div class="product-actions d-flex align-items-center">
 
-                                <div class="quantidadeinput">
+                                <div class="quantidadeinput" style=" margin-right: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                    <p class="mb-1 fw-bold " >Qtd pedido</p>
                                     <input type="number" oninput="validarInteiro(this)" class="form-control me-2" value="{{produto.quantidade}}"
                                     min="1" max="99"
                                     onchange="atualizaprecototal('{{produto.preco_por_caixa}}', this.value,'preco-total-{{produto_id}}', '{{produto_id}}')"
-                                    style="width: 70px;">
+                                    style="width: 40px; padding: 2px;">
                                 </div>
-                            <div class="precototal">
-                                <p class="mb-1 fw-bold ">Preço total</p> <!-- ADICIONAR O VALOR DINAMICO  -->
-                                <p class="mb-2 carrinho-precototal" id="preco-total-{{produto_id}}">R$
+                            <div class="precototal" style=" margin-right: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                <p class="mb-1 fw-bold ">Preço total</p> 
+                                <p class="mb-2 carrinho-precototal" style="padding-left: 3px; padding-right: 3px;" id="preco-total-{{produto_id}}">R$
                                     {{produto.subtotal}}</p>
                             </div>
                             <div class="lixeiraicon">

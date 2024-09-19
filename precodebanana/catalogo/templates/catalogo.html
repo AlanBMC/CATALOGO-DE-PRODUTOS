@@ -14,7 +14,7 @@
 <body>
     
     <!-- Cabeçalho -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning" style=" box-shadow: 0 4px 8px rgba(64, 170, 73, 0.323), 0 6px 20px rgba(109, 150, 101, 0.233);">
+    <nav class="navbar navbar-expand-lg" style="backdrop-filter: blur(5px); background-color: rgba(251, 231, 7, 0.574); box-shadow: 0 4px 8px rgba(64, 170, 73, 0.323), 0 6px 20px rgba(109, 150, 101, 0.233);">
         <div class="container">
             <a  class="navbar-brand d-flex align-items-center" href="#">
                 <img style="border-radius: 50%;" src="{% static 'logo2.png' %}" alt="Logo Preço de Banana" width="50" height="50"  class="d-inline-block align-top me-2">
@@ -58,7 +58,7 @@
     <main  class="container mt-5 catalogo-h">
         <div id="inicio" class="catalogotexto">
 
-            <h1 class="text-center mb-4 ">Catálogo  </h1>
+            <h1 class="text-center mb-4 ">Catálogo </h1>
         </div>
 
         <div class="row justify-content-center">
@@ -71,9 +71,14 @@
                     
                     <div class="product-details text-center">
                         <p><strong>{{produto.nome}}</strong></p>
-                        <p >Preço UN: R$ {{produto.preco_un}}</p>
-                        <p>Preço por caixa: R$ {{produto.preco_por_caixa}}</p>
-                        <p>Quantidade por caixa - {{produto.quantidade_na_caixa}}</p>
+                            <p >Preço un: R$ 
+                                <strong> 
+                                {{produto.preco_un}}
+
+                                </strong>
+                            </p>
+                        <p>Preço por caixa: R$ <strong style="font-size: 18px;">  {{produto.preco_por_caixa}}</strong></p>
+                        <p>Quantidade por caixa - <strong> {{produto.quantidade_na_caixa}}</strong></p>
                         <form method="POST"> {% csrf_token %}
                             <input type="hidden" name="id_produto" id="id_produto_{{produto.id}}" value="{{produto.id}}">
                             <button type="button" style="margin-bottom: 5px; margin-top: 5px;" class="btn btn-success botao-add-carrinho" onclick="adicionaprodutoaocarrinho('{{produto.id}}')" >+ Adicionar ao carrinho</button>
