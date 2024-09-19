@@ -1,7 +1,7 @@
 
 function atualizaprecototal(precoporcaixa, quantidade, precototalid, produtoID){
     const precototal = precoporcaixa * quantidade;
-    const precototalfomatado = precototal.toFixed(2)
+    const precototalfomatado = precototal.toFixed(3)
     document.getElementById(precototalid).innerText = 'R$ ' + precototalfomatado
     
     totaldosprodutos()
@@ -50,10 +50,10 @@ function totaldosprodutos(){
         const preco = parseFloat(precoElemento.innerText.replace('R$', '').replace(',', '.'));
         totalGeral += preco
     })
-    document.getElementById('total-dos-produtos').innerText = 'R$ ' + totalGeral.toFixed(2)
-    document.getElementById('total-com-frete').innerText = 'R$ ' + totalGeral.toFixed(2)
-    document.getElementById('totalfrete').value = totalGeral.toFixed(2)
-    document.getElementById('totalpreco').value = totalGeral.toFixed(2)
+    document.getElementById('total-dos-produtos').innerText = 'R$ ' + totalGeral.toFixed(3)
+    document.getElementById('total-com-frete').innerText = 'R$ ' + totalGeral.toFixed(3)
+    document.getElementById('totalfrete').value = totalGeral.toFixed(3)
+    document.getElementById('totalpreco').value = totalGeral.toFixed(3)
 }
 document.addEventListener('DOMContentLoaded', function() {
     totaldosprodutos();  // Calcula o total dos produtos logo quando a página é carregada

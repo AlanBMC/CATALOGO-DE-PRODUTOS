@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from decimal import Decimal, InvalidOperation
 import json
 import requests
+
 # Create your views here.
 def catalogo(request):
     if request.method == 'GET':
@@ -29,7 +30,8 @@ def adiciona_produto_carrinho(request):
             # Se o produto já está no carrinho, incrementa a quantidade
             carrinho[str(produto_id)]['quantidade'] += 1
         else:
-            # Caso contrário, adiciona o produto ao carrinho
+
+            
             carrinho[str(produto_id)] = {
                 'imagem': str(produto.imagem),
                 'nome': produto.nome,
@@ -37,7 +39,7 @@ def adiciona_produto_carrinho(request):
                 'precoUN': float(produto.preco_un),
                 'quantidade_na_caixa': str(produto.quantidade_na_caixa),
                 'quantidade': 1,
-                'subtotal': 0
+                'subtotal': float(produto.preco_por_caixa)
             }
         request.session['carrinho'] = carrinho
         return JsonResponse({
