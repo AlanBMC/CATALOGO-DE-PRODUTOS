@@ -3,7 +3,6 @@ from .models import Produto
 from django.http import JsonResponse
 from decimal import Decimal, InvalidOperation
 import json
-import locale
 import urllib.parse
 
 
