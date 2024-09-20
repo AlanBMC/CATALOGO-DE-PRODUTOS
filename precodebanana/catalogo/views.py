@@ -46,8 +46,12 @@ def adiciona_produto_carrinho(request):
                 'subtotal': float(produto.preco_por_caixa) 
             }
         request.session['carrinho'] = carrinho
+        carrinho = request.session.get('carrinho', {})
+        carrinho_qunatidade = len(carrinho)
+        print(carrinho_qunatidade)
         return JsonResponse({
-            'status':'produt adicionado com sucesso'
+            'status':'produt adicionado com sucesso',
+            'alertquantidade':carrinho_qunatidade
         })
 
 def atualiza_carrinho(request):
