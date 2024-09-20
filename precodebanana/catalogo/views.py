@@ -4,6 +4,10 @@ from django.http import JsonResponse
 from decimal import Decimal, InvalidOperation
 import json
 import requests
+import locale
+import pywhatkit as kit
+
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
 # Create your views here.
 def catalogo(request):
@@ -39,7 +43,7 @@ def adiciona_produto_carrinho(request):
                 'precoUN': float(produto.preco_un),
                 'quantidade_na_caixa': str(produto.quantidade_na_caixa),
                 'quantidade': 1,
-                'subtotal': float(produto.preco_por_caixa)
+                'subtotal': float(produto.preco_por_caixa) 
             }
         request.session['carrinho'] = carrinho
         return JsonResponse({
@@ -110,16 +114,30 @@ def buscacep(request):
 
 def envia_mensagem_wpp(request):
     if request.method == 'POST':
-        rua = request.POST.get('rua')
-        cidade = request.POST.get('cidade')
-        bairro = request.POST.get('bairro')
-        complemento = request.POST.get('complemento')
-        numero = request.POST.get('numero')
+
         total_com_frete = request.POST.get('total-com-frete')
         total_dos_produtos = request.POST.get('total-dos-produtos')
         carrinho = request.session.get('carrinho', {})
         quantidade_produtos = len(carrinho)
-        print(quantidade_produtos)
+        total_com_frete = float(request.POST.get('total-com-frete', 0).replace(',', '.'))
+        total_dos_produtos = float(request.POST.get('total-dos-produtos', 0).replace(',', '.'))
+        
+        preco_formatado2 = locale.format_string('%.2f', total_dos_produtos, grouping=True)
+        mensagem = f'''--- PEDIDOS -----
+Total dos produtos: {str(preco_formatado2)}
+Total com frete: {total_com_frete}
+Quantidade de produtos por caixa: {quantidade_produtos}
+---------------------------
+'''
+        mensagem_produto = ''
+        for item in carrinho.values():
+            preco_total_produto = item['subtotal']
+            preco_formatado = locale.format_string('%.2f', preco_total_produto, grouping=True)
+            mensagem_produto += f"Produto: {item['nome']}, Quantidade por caixa: {item['quantidade']}, Preço: {str(preco_formatado)}\n"
+
+        mensagem += mensagem_produto
+        print(mensagem)
+        kit.sendwhatmsg_instantly("+5565981488445", mensagem)
         return render(request, 'carrinho.html', {'produtos': carrinho, 'alertquantidade':len(carrinho)})
     else:
         return redirect('carrinho')

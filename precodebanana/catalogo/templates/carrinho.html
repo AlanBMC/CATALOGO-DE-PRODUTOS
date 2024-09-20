@@ -14,7 +14,7 @@
 <body>
 
     <!-- Cabeçalho -->
-    <nav class="navbar navbar-expand-lg " style=" backdrop-filter: blur(10px); background-color: rgba(251, 231, 7, 0.574); box-shadow: 0 4px 8px rgba(64, 170, 73, 0.323), 0 6px 20px rgba(109, 150, 101, 0.233);">
+    <nav class="navbar navbar-expand-lg " style=" backdrop-filter: blur(5px); background-color: rgba(251, 231, 7, 0.574); box-shadow: 0 4px 8px rgba(64, 170, 73, 0.323), 0 6px 20px rgba(109, 150, 101, 0.233);">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="{%url 'catalogo' %}">
                 <img style="border-radius: 50%;" src="{% static 'logo2.png' %}" alt="Logo Preço de Banana" width="50"
@@ -28,11 +28,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{%url 'catalogo' %}">Início</a>
+                    <li class="nav-item ">
+                        <a class="nav-link active botao-inicio" style="background-color: #79e415c8; display: inline-block; margin: 10px; padding-left: 10px; padding-right: 10px; border-radius: 10px; " aria-current="page" href="{%url 'catalogo' %}">Início</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{%url 'catalogo' %}">Produtos</a>
+                        <a class="nav-link botao-prod" style="background-color: #79e415c8; display: inline-block; margin: 10px; border-radius: 10px; padding-left: 10px; padding-right: 10px; margin-left:10px; color: black;" href="{%url 'catalogo' %}">Produtos</a>
                     </li>
 
                 </ul>
@@ -63,13 +63,13 @@
             <!-- Lista de Produtos -->
             <section class="col-12 col-lg-8">
                 <div class="product-list">
-                    <!----------------------- ESTRUTURA PARA SER CRIADA DINAMICAMENTE ---------------------------------->
+                    <!----------------------- ESTRUTURA PARA SER CRIADA DINAMICAMENTE ------- --------------------------->
                     {% if produtos %}
                     {%for produto_id, produto in produtos.items %}
-                    <div class="product-card mb-3 d-flex justify-content-between align-items-center p-3 rounded" style=" box-shadow: 0 4px 8px rgba(64, 170, 73, 0.276), 0 6px 20px rgba(109, 150, 101, 0.202);">
+                    <div class="product-card mb-3 d-flex justify-content-between align-items-center p-3 rounded" style=" backdrop-filter: blur(5px); box-shadow: 0 4px 8px rgba(64, 170, 73, 0.276), 0 6px 20px rgba(109, 150, 101, 0.202);">
                         <div class="product-info d-flex align-items-center">
-                            <div class="product-image me-3">
-                                <img src="/media/{{produto.imagem}}" alt="Produto" width="80" height="80">
+                            <div class="product-image me-3" >
+                                <img src="/media/{{produto.imagem}}" class="imagem-carrinho" alt="Produto" width="80" height="80">
                             </div>
                             <div class="precocaixa" style="display: flex; flex-direction: column; justify-content: center; align-items: center; " >
                                 <p class="mb-1 fw-bold " >Preço Caixa</p>
@@ -88,7 +88,10 @@
 
                                 <div class="quantidadeinput" style=" margin-right: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                                     <p class="mb-1 fw-bold " >Qtd pedido</p>
-                                    <input type="number" oninput="validarInteiro(this)" class="form-control me-2" value="{{produto.quantidade}}"
+                                    <input type="number"
+                                      onblur="validarInteiro(this)"
+                                       class="form-control me-2"
+                                        value="{{produto.quantidade}}"
                                     min="1" max="99"
                                     onchange="atualizaprecototal('{{produto.preco_por_caixa}}', this.value,'preco-total-{{produto_id}}', '{{produto_id}}')"
                                     style="width: 40px; padding: 2px;">
@@ -143,17 +146,7 @@
                     </form>
                     <form action="{% url 'envia_pedido' %}" method="POST"> {% csrf_token %}
                   
-                        <div class="mb-3">
-                            <p>Rua: {{rua}}</p>
-                            <input type="hidden" name="rua" value="{{rua}}">
-                            <p >Cidade: {{cidade}}</p>
-                            <input type="hidden" name="cidade" value="{{cidade}}">
-                            <p >Bairro: {{bairro}}</p>
-                            <input type="hidden" name="bairro" value="{{bairro}}">
-                            <input type="hidden" name="quantidade" id="id-quantidade-envia-wpp">
-                            <input type="hidden" name="total-dos-produtos" id="totalpreco">
-                            <input type="hidden" name="total-com-frete" id="totalfrete">
-                        </div>
+
                         <div class="mb-3">
                             <label for="complemento" class="form-label">Complemento</label>
                             <input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento" required>

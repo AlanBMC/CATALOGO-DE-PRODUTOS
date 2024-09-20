@@ -61,7 +61,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function validarInteiro(input) {
     const valor = input.value;
-    
+    if (valor === "") {
+        return;
+    }
     // Verifica se o valor é um número inteiro maior ou igual a 1
     if (!Number.isInteger(parseFloat(valor)) || parseInt(valor) < 1) {
         input.value = 1;  // Se não for válido, redefine para o valor mínimo (1)

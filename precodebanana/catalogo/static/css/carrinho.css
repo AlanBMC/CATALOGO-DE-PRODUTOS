@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #6c5757;
+    background-color: #856060;
     font-family: Arial, sans-serif;
 }
 html{
@@ -76,11 +76,20 @@ nav {
         align-items: center;
         text-align: center;
     }
-
+    .imagem-carrinho{
+        margin-left: 15%;
+        }
     .summary-card {
         margin-top: 20px;
     }
+    .botao-prod{
+        padding: 10px;
+        margin: 10px;
+        display: inline-block;
+
+      }
 }
+
 .precocaixa {
     margin-left: 20px;  /* Adiciona um espaço entre as divs */
 }
@@ -115,4 +124,15 @@ nav {
 .carrinho-quantidade ,.carrinho-precocaixa, .carrinho-precoun, .carrinho-precototal{
     background-color: #00cc0068;
     border-radius: 5px;
+}
+
+.botao-menu-inicio{
+    background-color: #79e415c8;
+    border-radius: 10px;
+    transition: transform 0.2s ease;
+
+}
+.botao-menu-inicio:hover{
+    transform: scale(1.1); 
+
 }

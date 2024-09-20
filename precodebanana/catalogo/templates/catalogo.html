@@ -27,7 +27,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Início</a>
+                        <a class="nav-link active botao-menu" aria-current="page" href="#">Início</a>
                     </li>
                
                
@@ -63,21 +63,18 @@
 
         <div class="row justify-content-center">
             {% for produto in catalogo %}
-            <div class="col-12 col-md-6 col-lg-4 mb-4 cards-produtos" >
-                <div class="product-card card bg-warning text-dark" style=" box-shadow: 0 4px 8px rgba(64, 170, 73, 0.323), 0 6px 20px rgba(109, 150, 101, 0.233);" >
+            <div class="col-12 col-md-6 col-lg-4 mb-4 product-container" >
+                <div class="product-card card text-dark" style="backdrop-filter: blur(5px); background-color: rgba(239, 243, 9, 0.574);  box-shadow: 0 4px 8px rgba(64, 170, 73, 0.323), 0 6px 20px rgba(109, 150, 101, 0.233);" >
                     <div  class="product-image mb-3">
                         <img   src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" id="imagemproduto" >
                     </div>
                     
                     <div class="product-details text-center">
-                        <p><strong>{{produto.nome}}</strong></p>
-                            <p >Preço un: R$ 
-                                <strong> 
-                                {{produto.preco_un}}
 
-                                </strong>
-                            </p>
-                        <p>Preço por caixa: R$ <strong style="font-size: 18px;">  {{produto.preco_por_caixa}}</strong></p>
+                        <p><strong class="produto-nome">{{produto.nome}}</strong></p>
+                        <p>Preço un: R$<strong class="preco-un"> {{produto.preco_un}}</strong></p>
+
+                        <p>Preço por caixa: R$ <strong class="preco-caixa" style="font-size: 18px;">  {{produto.preco_por_caixa}}</strong></p>
                         <p>Quantidade por caixa - <strong> {{produto.quantidade_na_caixa}}</strong></p>
                         <form method="POST"> {% csrf_token %}
                             <input type="hidden" name="id_produto" id="id_produto_{{produto.id}}" value="{{produto.id}}">
@@ -96,6 +93,27 @@
 
     <script>
         var addprodutoURL = "{% url 'adiciona_produto_carrinho' %}"
+
+        document.addEventListener("DOMContentLoaded", function(){
+    const procurar = document.getElementById('procurar-input');
+    const produtos = Array.from(document.getElementsByClassName('product-container'));
+    console.log('caçando')
+    procurar.addEventListener('input', function(){
+        const achados = procurar.value.toLowerCase()
+        produtos.forEach(prod =>{
+            const nomeProd = prod.querySelector(".produto-nome").textContent.toLowerCase();
+            const precoProd = prod.querySelector(".preco-un").textContent.toLowerCase();
+            const precocaixaProd = prod.querySelector(".preco-caixa").textContent.toLowerCase();
+            if (nomeProd.includes(achados) || precoProd.includes(achados) || precocaixaProd.includes(achados)){
+                prod.style.display = 'block';
+            }else{
+                prod.style.display = 'none';
+            }
+        })
+    })
+})
+
+
     </script>
     <script src="{%static 'js/catalogo.js' %}"></script>
 
