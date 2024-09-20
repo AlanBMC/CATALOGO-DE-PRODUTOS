@@ -130,36 +130,15 @@
             <section class="col-12 col-lg-4">
                 <div style=" box-shadow: 0 4px 8px rgba(64, 170, 73, 0.634), 0 6px 20px rgba(109, 150, 101, 0.659);" class="summary-card bg-warning p-4 rounded">
                     <h2 class="mb-4 text-center">Resumo do pedido</h2>
-                    <form action="{% url 'busca_cep' %}" method="POST"> {% csrf_token %}
 
-                        <div class="mb-3">
-                            <!-- FAZER AJAX PARA BUSCAR O CEP ATRAVES DO PYTHON  -->
-                            <label for="cep" class="form-label">CEP</label>
-                            <div class="input-group">
-                                <input type="text" class="form-control" id="cep-input" name="cep-input"
-                                    placeholder="Digite o CEP" required>
-                                <button class="btn btn-secondary botao-input" id="buscarCepBtn"
-                                    type="submit">Buscar</button>
-                            </div>
-
-                        </div>
-                    </form>
                     <form action="{% url 'envia_pedido' %}" method="POST"> {% csrf_token %}
                   
 
-                        <div class="mb-3">
-                            <label for="complemento" class="form-label">Complemento</label>
-                            <input type="text" class="form-control" id="complemento" name="complemento" placeholder="Complemento" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="complemento" class="form-label">Numero</label>
-                            <input type="text" class="form-control" id="numerocasa" name="numero" placeholder="Numero" required>
-                        </div>
                         <hr>
                         <p>Total dos produtos: <strong  id="total-dos-produtos">R$ 00,00</strong></p>
                         <p style="color: rgb(254, 8, 8);">Valor do frete - COMBINAR: <strong >R$ 00,00</strong></p>
                         <p>Total da compra: <strong id="total-com-frete">R$ 00,00</strong></p>
-                        <button type="submit" class="btn btn-success w-100 mt-3">Comprar</button>
+                        <button type="submit" style="box-shadow: 0 4px 8px rgba(64, 170, 73, 0.634), 0 6px 20px rgba(109, 150, 101, 0.659);"" class="btn btn-success w-100 mt-3">Comprar</button>
                 </div>
                 </form>
             </section>
