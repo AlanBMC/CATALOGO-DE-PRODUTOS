@@ -9,4 +9,6 @@ urlpatterns = [
     path('remove_produto_carrinho/', views.remove_produto_carrinho, name='remove_prod_carrinho'),
     path('enviaepedido/', views.envia_mensagem_wpp, name='envia_pedido'),
     path('atualiza_carrinho/', views.atualiza_carrinho, name='atualiza_carrinho'),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
