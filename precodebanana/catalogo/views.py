@@ -6,10 +6,6 @@ import json
 import locale
 import urllib.parse
 
-try:
-    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-except locale.Error:
-    locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
 
 # Create your views here.
 def catalogo(request):
@@ -118,7 +114,7 @@ Quantidade de produtos por caixa: {quantidade_produtos}
         mensagem_produto = ''
         for item in carrinho.values():
             preco_total_produto = item['subtotal']
-            preco_formatado = locale.format_string('%.2f', preco_total_produto, grouping=True)
+            preco_formatado = preco_total_produto
             mensagem_produto += f"Produto: {item['nome']}, Quantidade por caixa: {item['quantidade']}, Preço: {str(preco_formatado)}\n"
 
         mensagem += mensagem_produto
