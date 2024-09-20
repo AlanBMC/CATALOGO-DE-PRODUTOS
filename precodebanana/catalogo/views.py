@@ -3,9 +3,8 @@ from .models import Produto
 from django.http import JsonResponse
 from decimal import Decimal, InvalidOperation
 import json
-import requests
 import locale
-import pywhatkit as kit
+import urllib.parse
 
 locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 
@@ -101,17 +100,15 @@ def remove_produto_carrinho(request):
 def envia_mensagem_wpp(request):
     if request.method == 'POST':
 
-        total_com_frete = request.POST.get('total-com-frete')
+        #total_com_frete = request.POST.get('total-com-frete')
         total_dos_produtos = request.POST.get('total-dos-produtos')
         carrinho = request.session.get('carrinho', {})
         quantidade_produtos = len(carrinho)
-        total_com_frete = float(request.POST.get('total-com-frete', 0).replace(',', '.'))
-        total_dos_produtos = float(request.POST.get('total-dos-produtos', 0).replace(',', '.'))
+ 
         
-        preco_formatado2 = locale.format_string('%.2f', total_dos_produtos, grouping=True)
         mensagem = f'''--- PEDIDOS -----
-Total dos produtos: {str(preco_formatado2)}
-Total com frete: {total_com_frete}
+Total dos produtos: {str(total_dos_produtos)}
+Total com frete: {str(total_dos_produtos)}
 Quantidade de produtos por caixa: {quantidade_produtos}
 ---------------------------
 '''
@@ -123,8 +120,11 @@ Quantidade de produtos por caixa: {quantidade_produtos}
 
         mensagem += mensagem_produto
         print(mensagem)
-        kit.sendwhatmsg_instantly("+5565981488445", mensagem)
-        return render(request, 'carrinho.html', {'produtos': carrinho, 'alertquantidade':len(carrinho)})
+        mensagem_encoded = urllib.parse.quote(mensagem)
+        numero_telefone = "+5565981488445".replace('+', '')
+        whatsapp_url = f"https://wa.me/{numero_telefone}?text={mensagem_encoded}"
+        return redirect(whatsapp_url)
+        #return render(request, 'carrinho.html', {'produtos': carrinho, 'alertquantidade':len(carrinho)})
     else:
         return redirect('carrinho')
 
