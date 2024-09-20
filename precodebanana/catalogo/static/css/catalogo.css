@@ -5,6 +5,7 @@
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
+
 html{
     scroll-behavior: smooth;
 }
@@ -14,7 +15,7 @@ body {
     margin: 0;
 }
 
-/* Cabeçalho */
+
 header {
     background-color: #a38323;
     color: #fff;
