@@ -107,14 +107,14 @@ def envia_mensagem_wpp(request):
         mensagem = f'''--- PEDIDOS -----
 Total dos produtos: {str(total_dos_produtos)}
 Total com frete: {str(total_dos_produtos)}
-Quantidade de produtos por caixa: {quantidade_produtos}
+Quantidade de caixa por produto: {quantidade_produtos}
 ---------------------------
 '''
         mensagem_produto = ''
         for item in carrinho.values():
             preco_total_produto = item['subtotal']
             preco_formatado = preco_total_produto
-            mensagem_produto += f"Produto: {item['nome']}, Quantidade por caixa: {item['quantidade']}, Preço: {str(preco_formatado)}\n"
+            mensagem_produto += f"Produto: {item['nome']}, Quantidade de caixas: {item['quantidade']}, Preço: {str(preco_formatado)}\n"
 
         mensagem += mensagem_produto
         print(mensagem)
