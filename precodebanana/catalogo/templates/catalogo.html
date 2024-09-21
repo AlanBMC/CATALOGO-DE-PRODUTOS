@@ -90,7 +90,7 @@
 
                         <p><strong class="produto-nome">{{produto.nome}}</strong></p>
                         {% if varejo %}
-                        <p>Preço avulso: R$<strong class="preco-un"> {{produto.preco_avulso}}</strong></p>
+                        <p>Preço avulso: R$<strong class="preco-av"> {{produto.preco_avulso}}</strong></p>
                         {% else %}
                         <p>Preço un: R$<strong class="preco-un"> {{produto.preco_un}}</strong></p>
                         
@@ -130,9 +130,7 @@
         const achados = procurar.value.toLowerCase()
         produtos.forEach(prod =>{
             const nomeProd = prod.querySelector(".produto-nome").textContent.toLowerCase();
-            const precoProd = prod.querySelector(".preco-un").textContent.toLowerCase();
-            const precocaixaProd = prod.querySelector(".preco-caixa").textContent.toLowerCase();
-            if (nomeProd.includes(achados) || precoProd.includes(achados) || precocaixaProd.includes(achados)){
+            if (nomeProd.includes(achados) ){
                 prod.style.display = 'block';
             }else{
                 prod.style.display = 'none';
