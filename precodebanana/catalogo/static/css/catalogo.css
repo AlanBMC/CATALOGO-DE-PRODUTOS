@@ -271,3 +271,26 @@ footer {
     margin-top: 10px; /* Espaço entre o ícone e o texto */
     font-size: 16px; /* Tamanho da fonte */
 }
+.wpp {
+    position: fixed; /* Fixa o elemento na tela */
+    bottom: 20px; /* Distância do fundo */
+    right: 20px; /* Distância da direita */
+    z-index: 1000; /* Garante que o ícone fique acima de outros elementos */
+}
+.wpp-icon {
+    width: 60px; /* Tamanho do ícone */
+    height: 60px; /* Tamanho do ícone */
+    border-radius: 50%; /* Faz o ícone ser redondo */
+    background-color: #25D366; /* Cor de fundo do WhatsApp */
+    padding: 10px; /* Espaço interno */
+    transition: transform 0.3s; /* Transição suave para efeito de hover */
+}
+
+.wpp-icon:hover {
+    transform: scale(1.1); /* Aumenta o tamanho do ícone ao passar o mouse */
+}
+/* Estilo do badge */
+.badge {
+    font-size: 0.75rem; /* Tamanho da fonte do badge */
+    padding: 0.5em; /* Espaçamento interno */
+}

@@ -146,3 +146,29 @@ nav {
     transform: scale(1.1); 
 
 }
+
+footer {
+    background-color: #282828; /* Fundo escuro */
+    color: #ffffff; /* Texto branco */
+    padding: 20px 0; /* Espaçamento vertical */
+}
+
+.container {
+    text-align: center; /* Centraliza o conteúdo */
+}
+
+.instagram-icon {
+    width: 40px; /* Tamanho do ícone */
+    height: 40px; /* Tamanho do ícone */
+    transition: transform 0.3s; /* Transição suave para efeito de hover */
+}
+
+.instagram-icon:hover {
+    transform: scale(1.1); /* Aumenta o tamanho do ícone ao passar o mouse */
+}
+
+.footer-text {
+    margin-top: 10px; /* Espaço entre o ícone e o texto */
+    font-size: 16px; /* Tamanho da fonte */
+}
+
