@@ -294,3 +294,13 @@ footer {
     font-size: 0.75rem; /* Tamanho da fonte do badge */
     padding: 0.5em; /* Espaçamento interno */
 }
+
+.btn {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.btn i {
+    margin-right: 5px; /* Espaço entre o ícone e o texto */
+}

@@ -37,3 +37,4 @@ function sucesso() {
         mensagem.classList.remove('fade-out'); // Remover a classe de animação
     }, 4000);
 }
+
