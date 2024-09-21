@@ -163,23 +163,67 @@ h1 {
     transform: scale(1.1); 
 
 }
+
 @media (max-width: 768px) {
     .product-card {
         position: relative;
-        left: 17%;
-      }
+        left: 10%;
+    }
+
+    .navbar {
+        justify-content: space-between;
+    }
+
+  
+    .form-control {
+        margin-bottom: 10px;
+        width: 100%;
+    }
       .botao-menu{
-        padding: 10px;
+        padding: 12px;
         margin: 10px;
         display: inline-block;
 
+      }
+
+      .precodebanana{
+        display: none;
       }
       .container, .navbar{
         justify-content: center;
         align-self: center;
         align-items: center;
+      
       }
+  
 }
+
+.mensagem-sucesso {
+    display: none;
+    position: fixed;
+    top: 40%;
+    right: 13%;
+    background-color: #28a745; /* Cor verde para sucesso */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    font-size: 16px;
+}
+
+.fade-out {
+animation: fadeOut 1s forwards;
+}
+@keyframes fadeOut {
+0% {
+    opacity: 1;
+}
+100% {
+    opacity: 0;
+}
+}
+
 .product-image {
     background-color: #ccc;          /* Cor de fundo da div */
     height: 200px;                   /* Altura fixa da div */

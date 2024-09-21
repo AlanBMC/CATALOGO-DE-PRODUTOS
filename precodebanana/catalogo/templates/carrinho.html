@@ -19,7 +19,7 @@
             <a class="navbar-brand d-flex align-items-center" href="{%url 'catalogo' %}">
                 <img style="border-radius: 50%;" src="{% static 'logo2.png' %}" alt="Logo Preço de Banana" width="50"
                     height="50" class="d-inline-block align-top me-2">
-                <span class="fw-bold">Preço de Banana</span>
+                <span class="fw-bold preco-de-banana">Preço de Banana</span>
             </a>
             <!-- Botão para colapsar o menu no mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -72,29 +72,40 @@
                                 <img src="/media/{{produto.imagem}}" class="imagem-carrinho" alt="Produto" width="80" height="80">
                             </div>
                             <div class="precocaixa" style="display: flex; flex-direction: column; justify-content: center; align-items: center; " >
-                                <p class="mb-1 fw-bold " >Preço Caixa</p>
-                                <p class="mb-2 carrinho-precocaixa" style="padding: 2px;">R$ {{produto.preco_por_caixa}}</p>
+                       
                             </div>
                             <div class="precoun"  style="display: flex; flex-direction: column; justify-content: center; align-items: center; " >
+                                <p class="mb-1 fw-bold " >Preço avulso</p>
+                                <p class="mb-2 carrinho-precoun" style="padding: 2px;">R$ {{produto.preco_avulso}}</p>
+                                <p class="mb-1 fw-bold " > Quantidade avulso</p>
+                                <input type="number"
+                                onblur="validarInteiro(this)"
+                                 class="form-control me-2"
+                                  value="{{produto.quantidade}}"
+                              min="0" max="99"
+                              onchange="atualizaprecototal('{{produto.preco_por_caixa}}', this.value,'preco-total-{{produto_id}}', '{{produto_id}}')"
+                              style="width: 40px; padding: 2px;">                           
+                             </div>
+                            <div class="quant-carrinho"  style="display: flex; flex-direction: column; justify-content: center; align-items: center;" >
                                 <p class="mb-1 fw-bold " >Preço un</p>
                                 <p class="mb-2 carrinho-precoun" style="padding: 2px;">R$ {{produto.precoUN}}</p>
-                            </div>
-                            <div class="quant-carrinho"  style="display: flex; flex-direction: column; justify-content: center; align-items: center;" >
-                                <p class="mb-1 fw-bold ">Quantidade</p>
-                                <p class="mb-2 carrinho-quantidade" style="padding-left: 5px; padding-right: 5px;">{{produto.quantidade_na_caixa}}</p>
+                                <p class="mb-1 fw-bold " >Preço Caixa</p>
+                                <p class="mb-2 carrinho-precocaixa" style="padding: 2px;">R$ {{produto.preco_por_caixa}}</p>
+                                <p class="mb-1 fw-bold " >Qtd por Caixa</p>
+                                <input type="number"
+                                  onblur="validarInteiro(this)"
+                                   class="form-control me-2"
+                                    value="{{produto.quantidade}}"
+                                min="0" max="99"
+                                onchange="atualizaprecototal('{{produto.preco_por_caixa}}', this.value,'preco-total-{{produto_id}}', '{{produto_id}}')"
+                                style="width: 40px; padding: 2px;">
                             </div>
                         </div>
+                         <!-- Redefinir metodo que é mostrado, colocar um acima do outro -->
                         <div class="product-actions d-flex align-items-center">
 
                                 <div class="quantidadeinput" style=" margin-right: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                    <p class="mb-1 fw-bold " >Qtd pedido</p>
-                                    <input type="number"
-                                      onblur="validarInteiro(this)"
-                                       class="form-control me-2"
-                                        value="{{produto.quantidade}}"
-                                    min="1" max="99"
-                                    onchange="atualizaprecototal('{{produto.preco_por_caixa}}', this.value,'preco-total-{{produto_id}}', '{{produto_id}}')"
-                                    style="width: 40px; padding: 2px;">
+                             
                                 </div>
                             <div class="precototal" style=" margin-right: 30px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                                 <p class="mb-1 fw-bold ">Preço total</p> 
@@ -138,7 +149,7 @@
                         <p>Total dos produtos: <strong  id="total-dos-produtos">R$ 00,00</strong></p>
                         <p style="color: rgb(254, 8, 8);">Valor do frete - COMBINAR: <strong >R$ 00,00</strong></p>
                         <p>Total da compra: <strong id="total-com-frete">R$ 00,00</strong></p>
-                        <input type="text" name="total-dos-produtos" id="preco-total">
+                        <input type="hidden" name="total-dos-produtos" id="preco-total">
                         <button type="submit" style="box-shadow: 0 4px 8px rgba(64, 170, 73, 0.634), 0 6px 20px rgba(109, 150, 101, 0.659);"" class="btn btn-success w-100 mt-3">Comprar</button>
                 </div>
                 </form>

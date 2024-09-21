@@ -30,6 +30,11 @@ def adiciona_produto_carrinho(request):
         if str(produto_id) in carrinho:
             # Se o produto já está no carrinho, incrementa a quantidade
             carrinho[str(produto_id)]['quantidade'] += 1
+            preco_por_caixa = float(carrinho[str(produto_id)]['preco_por_caixa'])
+            quantidade = int(carrinho[str(produto_id)]['quantidade'])
+
+            # Atualiza o subtotal do produto
+            carrinho[str(produto_id)]['subtotal'] = preco_por_caixa * quantidade
         else:
 
             
@@ -39,23 +44,24 @@ def adiciona_produto_carrinho(request):
                 'preco_por_caixa': float(produto.preco_por_caixa),
                 'precoUN': float(produto.preco_un),
                 'quantidade_na_caixa': str(produto.quantidade_na_caixa),
+                'preco_avulso': float(produto.preco_avulso),
                 'quantidade': 1,
                 'subtotal': float(produto.preco_por_caixa) 
             }
         request.session['carrinho'] = carrinho
         carrinho = request.session.get('carrinho', {})
-        carrinho_qunatidade = len(carrinho)
-        print(carrinho_qunatidade)
+        carrinho_quantidade = len(carrinho)
+        print(carrinho_quantidade)
         return JsonResponse({
             'status':'produt adicionado com sucesso',
-            'alertquantidade':carrinho_qunatidade
+            'alertquantidade':carrinho_quantidade
         })
 
 def atualiza_carrinho(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         produto_id = data.get('id_produto')
-        quantidade = data.get('quantidade')
+        quantidade = data.get('quantidade') 
 
         # Pega o carrinho da sessão
         carrinho = request.session.get('carrinho', {})
@@ -70,7 +76,7 @@ def atualiza_carrinho(request):
 
             # Atualiza a quantidade do produto no carrinho
             carrinho[str(produto_id)]['quantidade'] = quantidade
-
+            print(carrinho[str(produto_id)]['subtotal'])
             # Salva o carrinho atualizado na sessão
             request.session['carrinho'] = carrinho
 
@@ -107,7 +113,7 @@ def envia_mensagem_wpp(request):
         mensagem = f'''--- PEDIDOS -----
 Total dos produtos: {str(total_dos_produtos)}
 Total com frete: {str(total_dos_produtos)}
-Quantidade de caixa por produto: {quantidade_produtos}
+Quantidade de produto: {quantidade_produtos}
 ---------------------------
 '''
         mensagem_produto = ''

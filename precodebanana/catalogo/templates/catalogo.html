@@ -18,7 +18,7 @@
         <div class="container">
             <a  class="navbar-brand d-flex align-items-center" href="#">
                 <img style="border-radius: 50%;" src="{% static 'logo2.png' %}" alt="Logo Preço de Banana" width="50" height="50"  class="d-inline-block align-top me-2">
-                <span class="fw-bold " >PREÇO DE BANANA</span>
+                <span class="fw-bold precodebanana" >PREÇO DE BANANA</span>
             </a>
             <!-- Botão para colapsar o menu no mobile -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,7 +27,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active botao-menu" aria-current="page" href="#">Início</a>
+                        <a  class="nav-link active botao-menu" aria-current="page" href="#">Início</a>
                     </li>
                
                
@@ -35,23 +35,27 @@
                 <!-- Ícone do carrinho -->
                 
                 <div class="d-flex align-items-center ms-3">
-                   
-                    <a href="{% url 'carrinho' %}" class="cart me-3 carrinho position-relative">
-                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"  class="bi bi-cart-plus-fill carrinho" viewBox="0 0 16 16">
-                                 <path fill="#008000" d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
-                                </svg>
-                                <span id="quantidade-produtos-no-carrinho" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                    <span class="visually-hidden">unread messages</span>
-                                  </span>
-                            </a>
+                    <a href="{% url 'carrinho' %}" class="cart me-3 carrinho position-relative" aria-label="Carrinho de compras">
+                        <!-- Ícone do carrinho -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" class="bi bi-cart-plus-fill carrinho" viewBox="0 0 16 16">
+                            <path fill="#008000" d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0"/>
+                        </svg>
+                        <span id="quantidade-produtos-no-carrinho" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            <span class="visually-hidden">unread messages</span>
+                        </span>
+                    </a>
+                
                     <!-- Barra de pesquisa -->
                     <form class="d-flex">
-                        <input class="form-control me-2" type="search" id="procurar-input" placeholder="Pesquisar produtos" aria-label="Search">
+                        <input class="form-control me-2" type="search" id="procurar-input" placeholder="Pesquisar produtos" aria-label="Pesquisar produtos">
                     </form>
                 </div>
+                
             </div>
         </div>
+        
     </nav>
+    <p id="mensagem-sucesso" class="mensagem-sucesso">Item adicionado ao carrinho!</p>
 
     <!-- Catálogo -->
     <main  class="container mt-5 catalogo-h">
@@ -71,6 +75,7 @@
                     <div class="product-details text-center">
 
                         <p><strong class="produto-nome">{{produto.nome}}</strong></p>
+                        <p>Preço avulso: R$<strong class="preco-un"> {{produto.preco_avulso}}</strong></p>
                         <p>Preço un: R$<strong class="preco-un"> {{produto.preco_un}}</strong></p>
 
                         <p>Preço por caixa: R$ <strong class="preco-caixa" style="font-size: 18px;">  {{produto.preco_por_caixa}}</strong></p>

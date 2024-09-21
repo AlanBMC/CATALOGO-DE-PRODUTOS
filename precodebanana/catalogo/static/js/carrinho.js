@@ -3,12 +3,11 @@ function atualizaprecototal(precoporcaixa, quantidade, precototalid, produtoID){
     const precototal = precoporcaixa * quantidade;
     const precototalfomatado = precototal.toFixed(2)
     document.getElementById(precototalid).innerText = 'R$ ' + precototalfomatado
-    document.getElementById('totalprod').value = precototalfomatado
     totaldosprodutos()
     atualizaCarrinhoBackend(produtoID, quantidade);
 }
 function atualizaCarrinhoBackend(produtoID, quantidade) {
-    fetch('/catalogo/atualiza_carrinho/', {
+    fetch('/atualiza_carrinho/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -65,6 +64,6 @@ function validarInteiro(input) {
     }
     // Verifica se o valor é um número inteiro maior ou igual a 1
     if (!Number.isInteger(parseFloat(valor)) || parseInt(valor) < 1) {
-        input.value = 1;  // Se não for válido, redefine para o valor mínimo (1)
+        input.value = 0;  // Se não for válido, redefine para o valor mínimo (1)
     }
 }
