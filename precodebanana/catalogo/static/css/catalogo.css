@@ -153,8 +153,9 @@ h1 {
 
 }
 
-.botao-menu{
+.botao-menu, .botao-menu2, .botao-menu3{
     background-color: #79e415c8;
+    margin: 5px;
     border-radius: 10px;
     transition: transform 0.2s ease;
 
@@ -179,7 +180,7 @@ h1 {
         margin-bottom: 10px;
         width: 100%;
     }
-      .botao-menu{
+      .botao-menu, .botao-menu2, .botao-menu3{
         padding: 12px;
         margin: 10px;
         display: inline-block;
@@ -243,4 +244,30 @@ animation: fadeOut 1s forwards;
     object-fit: cover;               /* A imagem cobre toda a div mantendo a proporção */
     border-radius: 5px;  
     min-height: 100%;              /* Arredondamento da imagem */
+}
+
+
+footer {
+    background-color: #282828; /* Fundo escuro */
+    color: #ffffff; /* Texto branco */
+    padding: 20px 0; /* Espaçamento vertical */
+}
+
+.container {
+    text-align: center; /* Centraliza o conteúdo */
+}
+
+.instagram-icon {
+    width: 40px; /* Tamanho do ícone */
+    height: 40px; /* Tamanho do ícone */
+    transition: transform 0.3s; /* Transição suave para efeito de hover */
+}
+
+.instagram-icon:hover {
+    transform: scale(1.1); /* Aumenta o tamanho do ícone ao passar o mouse */
+}
+
+.footer-text {
+    margin-top: 10px; /* Espaço entre o ícone e o texto */
+    font-size: 16px; /* Tamanho da fonte */
 }

@@ -4,6 +4,7 @@ from . import views
 from django.conf.urls.static import static
 urlpatterns = [
     path('', views.catalogo, name='catalogo'),
+    path('varejo/', views.catalogo_varejo, name='catalogo_varejo'),
     path('carrinho/', views.carrinho_view, name='carrinho'),
     path('adicionar_ao_carrinho/', views.adiciona_produto_carrinho, name='adiciona_produto_carrinho'),
     path('remove_produto_carrinho/', views.remove_produto_carrinho, name='remove_prod_carrinho'),

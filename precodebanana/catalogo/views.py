@@ -15,6 +15,8 @@ def catalogo(request):
         return render(request, 'catalogo.html',{'catalogo':produtos, 'alertquantidade':quantidade_produtos, 'varejo': False})
 
     return render(request, 'catalogo.html')
+
+
 def catalogo_varejo(request):
     if request.method == 'GET':
         produtos = Produto.objects.all()
