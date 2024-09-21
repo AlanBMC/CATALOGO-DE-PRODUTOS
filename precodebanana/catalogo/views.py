@@ -12,14 +12,28 @@ def catalogo(request):
         produtos = Produto.objects.all()
         carrinho = request.session.get('carrinho', {})
         quantidade_produtos= len(carrinho)
-        return render(request, 'catalogo.html',{'catalogo':produtos, 'alertquantidade':quantidade_produtos})
+        return render(request, 'catalogo.html',{'catalogo':produtos, 'alertquantidade':quantidade_produtos, 'varejo': False})
 
     return render(request, 'catalogo.html')
+def catalogo_varejo(request):
+    if request.method == 'GET':
+        produtos = Produto.objects.all()
+        carrinho = request.session.get('carrinho', {})
+        quantidade_produtos= len(carrinho)
+        return render(request, 'catalogo.html',{'catalogo':produtos, 'alertquantidade':quantidade_produtos, 'varejo': True})
+
+    return render(request, 'catalogo.html')
+
+
 
 def carrinho_view(request):
     carrinho = request.session.get('carrinho', {})
     quantidade_produtos = len(carrinho)
-    return render(request, 'carrinho.html', {'produtos': carrinho,'alertquantidade': quantidade_produtos})
+    total = 0
+    for item in carrinho.values():
+        total += item['subtotal'] + item['subtotal_var']
+    total = float(total)
+    return render(request, 'carrinho.html', {'produtos': carrinho,'alertquantidade': quantidade_produtos, 'total': total})
 
 def adiciona_produto_carrinho(request):
     if request.method == 'POST':
@@ -30,14 +44,16 @@ def adiciona_produto_carrinho(request):
         if str(produto_id) in carrinho:
             # Se o produto já está no carrinho, incrementa a quantidade
             carrinho[str(produto_id)]['quantidade'] += 1
+            carrinho[str(produto_id)]['quantidade_var'] += 1
             preco_por_caixa = float(carrinho[str(produto_id)]['preco_por_caixa'])
+            preco_varejo = float(carrinho[str(produto_id)]['preco_avulso'])
             quantidade = int(carrinho[str(produto_id)]['quantidade'])
-
-            # Atualiza o subtotal do produto
+            quantidade_var = int(carrinho[str(produto_id)]['quantidade_var'])
+            carrinho[str(produto_id)]['subtotal_var'] = preco_varejo * quantidade_var
             carrinho[str(produto_id)]['subtotal'] = preco_por_caixa * quantidade
         else:
-
             
+            sub = float(produto.preco_avulso) * 5
             carrinho[str(produto_id)] = {
                 'imagem': str(produto.imagem),
                 'nome': produto.nome,
@@ -46,12 +62,14 @@ def adiciona_produto_carrinho(request):
                 'quantidade_na_caixa': str(produto.quantidade_na_caixa),
                 'preco_avulso': float(produto.preco_avulso),
                 'quantidade': 1,
-                'subtotal': float(produto.preco_por_caixa) 
+                'quantidade_var': 5,
+                'subtotal_var':sub,
+                'subtotal': float(produto.preco_por_caixa)
+             
             }
         request.session['carrinho'] = carrinho
         carrinho = request.session.get('carrinho', {})
         carrinho_quantidade = len(carrinho)
-        print(carrinho_quantidade)
         return JsonResponse({
             'status':'produt adicionado com sucesso',
             'alertquantidade':carrinho_quantidade
@@ -62,7 +80,7 @@ def atualiza_carrinho(request):
         data = json.loads(request.body)
         produto_id = data.get('id_produto')
         quantidade = data.get('quantidade') 
-
+        quantidade_var = data.get('quantidade_var') 
         # Pega o carrinho da sessão
         carrinho = request.session.get('carrinho', {})
 
@@ -70,17 +88,24 @@ def atualiza_carrinho(request):
             # Converte preco_por_caixa e quantidade para float/int
             preco_por_caixa = float(carrinho[str(produto_id)]['preco_por_caixa'])
             quantidade = int(quantidade)
-
+            preco_avulso = float(carrinho[str(produto_id)]['preco_avulso'])
+            quantidade_var = int(quantidade_var)
             # Atualiza o subtotal do produto
             carrinho[str(produto_id)]['subtotal'] = preco_por_caixa * quantidade
-
+            carrinho[str(produto_id)]['subtotal_var'] = preco_avulso * quantidade_var
             # Atualiza a quantidade do produto no carrinho
             carrinho[str(produto_id)]['quantidade'] = quantidade
-            print(carrinho[str(produto_id)]['subtotal'])
+            carrinho[str(produto_id)]['quantidade_var'] = quantidade_var
+            print(quantidade, quantidade_var, carrinho[str(produto_id)]['subtotal'], carrinho[str(produto_id)]['subtotal_var'])
             # Salva o carrinho atualizado na sessão
             request.session['carrinho'] = carrinho
-
-            return JsonResponse({'status': 'Carrinho atualizado com sucesso'})
+            total = 0
+            for item in carrinho.values():
+                total += item['subtotal'] + item['subtotal_var']
+            return JsonResponse({'status': 'Carrinho atualizado com sucesso', 
+                                 'subtotal': carrinho[str(produto_id)]['subtotal'],
+                                'subtotal_var': carrinho[str(produto_id)]['subtotal_var'],
+                                'total': total})
         else:
             return JsonResponse({'status': 'Produto não encontrado no carrinho'}, status=404)
 
@@ -117,13 +142,18 @@ Quantidade de produto: {quantidade_produtos}
 ---------------------------
 '''
         mensagem_produto = ''
+        total = 0
         for item in carrinho.values():
             preco_total_produto = item['subtotal']
+            total += item['subtotal'] + item['subtotal_var']
             preco_formatado = preco_total_produto
             mensagem_produto += f"Produto: {item['nome']}, Quantidade de caixas: {item['quantidade']}, Preço: {str(preco_formatado)}\n"
-
+        mensagem = f'''--- PEDIDOS -----
+Total dos produtos: {str(total)}
+Total com frete: {str(total)}
+---------------------------
+'''
         mensagem += mensagem_produto
-        print(mensagem)
         mensagem_encoded = urllib.parse.quote(mensagem)
         numero_telefone = "+5565981488445".replace('+', '')
         whatsapp_url = f"https://wa.me/{numero_telefone}?text={mensagem_encoded}"

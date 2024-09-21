@@ -13,7 +13,7 @@ class Produto(models.Model):
     @property
     def preco_avulso(self):
         preco_avulso = self.preco_un * Decimal('1.08')
-        # Formatar com duas casas decimais
+        # Formatar com duas casas decimais preco_avulso_arredondado = math.ceil(float(preco_avulso))
         return preco_avulso.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
 
 class Carrinho(models.Model):
