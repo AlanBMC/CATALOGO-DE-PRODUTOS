@@ -33,7 +33,7 @@ def carrinho_view(request):
     quantidade_produtos = len(carrinho)
     total = 0
     for item in carrinho.values():
-        total += item['subtotal'] + item['subtotal_var']
+        total += item['subtotal'] + item.get('subtotal_var', 0)
     total = float(total)
     return render(request, 'carrinho.html', {'produtos': carrinho,'alertquantidade': quantidade_produtos, 'total': total})
 
@@ -98,7 +98,6 @@ def atualiza_carrinho(request):
             # Atualiza a quantidade do produto no carrinho
             carrinho[str(produto_id)]['quantidade'] = quantidade
             carrinho[str(produto_id)]['quantidade_var'] = quantidade_var
-            print(quantidade, quantidade_var, carrinho[str(produto_id)]['subtotal'], carrinho[str(produto_id)]['subtotal_var'])
             # Salva o carrinho atualizado na sessão
             request.session['carrinho'] = carrinho
             total = 0
@@ -131,34 +130,48 @@ def remove_produto_carrinho(request):
 def envia_mensagem_wpp(request):
     if request.method == 'POST':
 
-        #total_com_frete = request.POST.get('total-com-frete')
-        total_dos_produtos = request.POST.get('total-dos-produtos')
+        # Obtendo o carrinho da sessão
         carrinho = request.session.get('carrinho', {})
-        quantidade_produtos = len(carrinho)
- 
-        
-        mensagem = f'''--- PEDIDOS -----
-Total dos produtos: {str(total_dos_produtos)}
-Total com frete: {str(total_dos_produtos)}
-Quantidade de produto: {quantidade_produtos}
----------------------------
-'''
+        total_geral = 0
         mensagem_produto = ''
-        total = 0
+
         for item in carrinho.values():
-            preco_total_produto = item['subtotal']
-            total += item['subtotal'] + item['subtotal_var']
-            preco_formatado = preco_total_produto
-            mensagem_produto += f"Produto: {item['nome']}, Quantidade de caixas: {item['quantidade']}, Preço: {str(preco_formatado)}\n"
-        mensagem = f'''--- PEDIDOS -----
-Total dos produtos: {str(total)}
-Total com frete: {str(total)}
----------------------------
+            # Cálculos individuais
+            preco_total_atacado = item['subtotal']
+            preco_total_varejo = item['subtotal_var']
+            quantidade_por_caixa = item['quantidade_na_caixa']
+            quantidade_atacado = item['quantidade']
+            quantidade_varejo = item['quantidade_var']
+
+            # Acumula o total geral
+            total_geral += preco_total_atacado + preco_total_varejo
+
+            # Formata a mensagem detalhada do produto
+            mensagem_produto += f'''Produto: {item['nome']}
+Quantidade pedida no Atacado (caixas): {quantidade_atacado}
+Quantidade por Caixa: {quantidade_por_caixa}
+Preço Total no Atacado: R$ {preco_total_atacado:.2f}
+
+Quantidade pedida no Varejo: {quantidade_varejo}
+Preço Total no Varejo: R$ {preco_total_varejo:.2f}
+
+-----------------------------------
 '''
-        mensagem += mensagem_produto
+
+        # Monta a mensagem final com o total dos produtos e o frete (se necessário)
+        mensagem = f'''--- RESUMO DO PEDIDO ---
+Total dos Produtos (sem frete): R$ {total_geral:.2f}
+Total com Frete: A combinar
+---------------------------
+{mensagem_produto}'''
+
+        # Codifica a mensagem e cria a URL do WhatsApp
         mensagem_encoded = urllib.parse.quote(mensagem)
         numero_telefone = "+5565981488445".replace('+', '')
         whatsapp_url = f"https://wa.me/{numero_telefone}?text={mensagem_encoded}"
+
+        
+        
         return redirect(whatsapp_url)
         #return render(request, 'carrinho.html', {'produtos': carrinho, 'alertquantidade':len(carrinho)})
     else:
